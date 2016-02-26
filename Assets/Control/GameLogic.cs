@@ -1,7 +1,12 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
+using UnityEngine.SceneManagement;
+
 using System.Collections;
 
 public class GameLogic : MonoBehaviour {
+
+	[SerializeField] private TextMesh scoreLabel;
 
 	private int score = 0;
 
@@ -10,6 +15,8 @@ public class GameLogic : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 	
+		scoreLabel = GameObject.Find ("Score Label").GetComponent<TextMesh> ();
+
 	}
 	
 	// Update is called once per frame
@@ -32,9 +39,9 @@ public class GameLogic : MonoBehaviour {
 	private IEnumerator CheckMatch(){
 
 		if (secondCard.Image == firstCard.Image) {
-			score += 10;
+			score++;
 
-			Debug.Log ("Score: " + score);
+			scoreLabel.text = "Score: " + score;
 		} else {
 
 			yield return new WaitForSeconds (0.5f);
@@ -44,6 +51,12 @@ public class GameLogic : MonoBehaviour {
 	
 		secondCard = null;
 		firstCard = null;
+
+	}
+
+	public void Restart(){
+
+		SceneManager.LoadScene ("Memory_Scene");
 
 	}
 		

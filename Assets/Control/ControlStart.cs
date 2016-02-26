@@ -3,15 +3,20 @@ using UnityEngine.UI;
 
 using System.Collections;
 
-//9:10A.M. - 11:29P.M.
-//10:12A.M - 12:52P.M.
+//09:10 A.M. - 11:29 P.M.
+//10:12 A.M. - 12:52 P.M.
+//03:20 P.M. - 03:51 P.M.
 
 public class ControlStart : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
 
-		SetupLevel ();
+		SetupBackgorund ();
+
+		MakeScoreText ();
+
+		MakeButton ();
 	
 	}
 	
@@ -20,7 +25,7 @@ public class ControlStart : MonoBehaviour {
 	
 	}
 
-	void SetupLevel(){
+	void SetupBackgorund(){
 
 		GameObject background = new GameObject ("Background");
 
@@ -36,4 +41,36 @@ public class ControlStart : MonoBehaviour {
 
 	}
 		
+
+	void MakeScoreText(){
+	
+		GameObject text = new GameObject ("Score Label");
+
+		text.transform.position = new Vector3(-8.75f, 4.65f, 1.0f);
+
+		text.transform.localScale = new Vector3(0.1f,0.1f,1.0f);
+
+		text.AddComponent<MeshRenderer> ();
+
+		text.AddComponent<TextMesh> ();
+
+		text.GetComponent<TextMesh>().text = "Score: ";
+
+		text.GetComponent<TextMesh> ().fontSize = 80;
+
+	}
+
+	void MakeButton(){
+
+		GameObject button = new GameObject ("UIButton");
+
+		button.transform.position = new Vector3 (8.0f,4.25f,1.0f);
+
+		button.AddComponent<SpriteRenderer> ().sprite = Resources.Load ("start-button", typeof(Sprite)) as Sprite;
+
+		button.AddComponent<BoxCollider2D> ();
+
+		button.AddComponent<UIButton> ();
+
+	}
 }

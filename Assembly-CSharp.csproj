@@ -50,6 +50,7 @@
      <Compile Include="Assets\Control\GameLogic.cs" />
      <Compile Include="Assets\Control\MakeDeck.cs" />
      <Compile Include="Assets\SetupControl.cs" />
+     <Compile Include="Assets\UIButton.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>
  </Reference>

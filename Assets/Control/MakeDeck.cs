@@ -12,7 +12,7 @@ public class MakeDeck : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-		float x = -3.0f, y = 3.0f, z = 2.0f;
+		float x = -3.0f, y = 2.0f, z = 2.0f;
 	
 		LoadCardImages ();
 	
@@ -23,7 +23,7 @@ public class MakeDeck : MonoBehaviour {
 			x += 3.0f;
 
 			if (i == 3) {
-				y = 0;
+				y = -1.0f;
 				x = -3.0f;
 			}
 		}
