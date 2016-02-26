@@ -23,6 +23,9 @@ public class SetupControl : MonoBehaviour {
 
 		control.AddComponent<ControlStart> ();
 
+		control.AddComponent<GameLogic> ();
+
 		control.AddComponent<MakeDeck> ();
+
 	}
 }

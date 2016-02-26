@@ -1,13 +1,20 @@
 ﻿using UnityEngine;
+
 using System.Collections;
+using System.Collections.Generic;
 
 public class MemoryCard : MonoBehaviour {
 
-	private Sprite card;
+	[SerializeField] private GameLogic logic;
+
+	private Sprite card, backImage;
 
 	// Use this for initialization
 	void Start () {
-	
+
+		backImage = this.gameObject.GetComponent<SpriteRenderer> ().sprite;
+		logic = GameObject.Find ("Control Object").GetComponent<GameLogic> ();
+
 	}
 	
 	// Update is called once per frame
@@ -18,11 +25,18 @@ public class MemoryCard : MonoBehaviour {
 	void OnMouseDown(){
 
 		this.gameObject.GetComponent<SpriteRenderer> ().sprite = card;
-		Debug.Log ("Testing 1 2 3");
+
+		logic.CheckRevealedCards(this);
+
 	}
 
-	public void SetCardImage(Sprite card){
+	public Sprite Image{
+		get{ return this.card;}
+		set{ this.card = value;}
+	}
 
-		this.card = card;
+	public void FlipFaceDown(){
+
+		this.gameObject.GetComponent<SpriteRenderer> ().sprite = backImage;
 	}
 }

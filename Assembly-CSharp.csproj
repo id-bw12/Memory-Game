@@ -47,6 +47,7 @@
   <ItemGroup>
      <Compile Include="Assets\CardScripts\MemoryCard.cs" />
      <Compile Include="Assets\Control\ControlStart.cs" />
+     <Compile Include="Assets\Control\GameLogic.cs" />
      <Compile Include="Assets\Control\MakeDeck.cs" />
      <Compile Include="Assets\SetupControl.cs" />
  <Reference Include="UnityEngine.UI">

@@ -4,6 +4,7 @@ using UnityEngine.UI;
 using System.Collections;
 
 //9:10A.M. - 11:29P.M.
+//10:12A.M
 
 public class ControlStart : MonoBehaviour {
 

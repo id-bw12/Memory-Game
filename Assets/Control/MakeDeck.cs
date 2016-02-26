@@ -5,16 +5,31 @@ using System.Collections.Generic;
 
 public class MakeDeck : MonoBehaviour {
 
-	private List<GameObject> deck;
+	private List<GameObject> deck = new List<GameObject> ();
 
 	private Sprite[] cardImages = new Sprite[4];
 
 	// Use this for initialization
 	void Start () {
+
+		float x = -3.0f, y = 3.0f, z = 2.0f;
 	
 		LoadCardImages ();
+	
+		for (int i = 0; i < 8; ++i) {
 
-		MakeMemoryCard ();
+			MakeMemoryCard (cardImages [i % 4], new Vector3 (x, y, z));
+
+			x += 3.0f;
+
+			if (i == 3) {
+				y = 0;
+				x = -3.0f;
+			}
+		}
+
+		ShuffleImages ();
+		//Debug.Log (deck.Count);
 	}
 	
 	// Update is called once per frame
@@ -30,13 +45,32 @@ public class MakeDeck : MonoBehaviour {
 		cardImages [3] = Resources.Load ("square-symbol", typeof(Sprite)) as Sprite;
 	}
 
-	void MakeMemoryCard(){
+	void ShuffleImages(){
+	
+		Sprite tempSprite;
+
+		int j;
+
+		for(int i = 0; i < 8; ++i){
+
+			tempSprite = deck[i].gameObject.GetComponent<MemoryCard>().Image;
+
+			j = Random.Range (0,7);
+
+			deck[i].gameObject.GetComponent<MemoryCard>().Image = deck[j].gameObject.GetComponent<MemoryCard>().Image;
+
+			deck[j].gameObject.GetComponent<MemoryCard>().Image = tempSprite;
+
+		}
+	}
+
+	void MakeMemoryCard(Sprite cardImage , Vector3 position){
 
 		GameObject memoryCard = new GameObject ("Card");
 
 		Sprite cardSprite = Resources.Load ("card_back", typeof(Sprite)) as Sprite;
 
-		memoryCard.transform.position = new Vector3 (-2.0f, 0.0f, 1.0f);
+		memoryCard.transform.position = position;
 
 		memoryCard.AddComponent<SpriteRenderer> ();
 
@@ -46,14 +80,10 @@ public class MakeDeck : MonoBehaviour {
 
 		memoryCard.AddComponent<MemoryCard> ();
 
-		SendCardImages (memoryCard);
+		memoryCard.GetComponent<MemoryCard> ().Image = cardImage;
+
+		deck.Add(memoryCard.gameObject);
 
 	}
 
-	void SendCardImages(GameObject memoryCard){
-
-
-		memoryCard.GetComponent<MemoryCard> ().SetCardImage (cardImages[2]);
-
-	}
 }
