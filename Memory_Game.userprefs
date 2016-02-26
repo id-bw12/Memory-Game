@@ -1,6 +1,13 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench />
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Control\MakeDeck.cs">
+    <Files>
+      <File FileName="Assets\Control\MakeDeck.cs" Line="81" Column="1" />
+      <File FileName="Assets\SetupControl.cs" Line="25" Column="3" />
+      <File FileName="Assets\CardScripts\MemoryCard.cs" Line="16" Column="73" />
+      <File FileName="Assets\Control\ControlStart.cs" Line="7" Column="23" />
+    </Files>
+  </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
