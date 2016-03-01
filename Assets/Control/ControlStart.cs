@@ -7,70 +7,76 @@ using System.Collections;
 //10:12 A.M. - 12:52 P.M.
 //03:20 P.M. - 03:51 P.M.
 
-public class ControlStart : MonoBehaviour {
+public class ControlStart : MonoBehaviour
+{
 
-	// Use this for initialization
-	void Start () {
+    // Use this for initialization
+    void Start()
+    {
 
-		SetupBackgorund ();
+        SetupBackgorund();
 
-		MakeScoreText ();
+        MakeScoreText();
 
-		MakeButton ();
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+        MakeButton();
 
-	void SetupBackgorund(){
+    }
 
-		GameObject background = new GameObject ("Background");
+    // Update is called once per frame
+    void Update()
+    {
 
-		Sprite backgroundSprite = Resources.Load ("table_top", typeof(Sprite)) as Sprite;
+    }
 
-		background.transform.position = new Vector3(0.0f,0.0f,5f);
+    void SetupBackgorund()
+    {
 
-		background.transform.localScale = new Vector3 (2.0f, 2.0f, 1.0f);
+        GameObject background = new GameObject("Background");
 
-		background.AddComponent<SpriteRenderer> ();
+        Sprite backgroundSprite = Resources.Load("table_top", typeof(Sprite)) as Sprite;
 
-		background.GetComponent<SpriteRenderer> ().sprite = backgroundSprite;
+        background.transform.position = new Vector3(0.0f, 0.0f, 5f);
 
-	}
-		
+        background.transform.localScale = new Vector3(2.0f, 2.0f, 1.0f);
 
-	void MakeScoreText(){
-	
-		GameObject text = new GameObject ("Score Label");
+        background.AddComponent<SpriteRenderer>();
 
-		text.transform.position = new Vector3(-8.75f, 4.65f, 1.0f);
+        background.GetComponent<SpriteRenderer>().sprite = backgroundSprite;
 
-		text.transform.localScale = new Vector3(0.1f,0.1f,1.0f);
+    }
 
-		text.AddComponent<MeshRenderer> ();
 
-		text.AddComponent<TextMesh> ();
+    void MakeScoreText()
+    {
 
-		text.GetComponent<TextMesh>().text = "Score: ";
+        GameObject text = new GameObject("Score Label");
 
-		text.GetComponent<TextMesh> ().fontSize = 80;
+        text.transform.position = new Vector3(-8.75f, 4.65f, 1.0f);
 
-	}
+        text.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
 
-	void MakeButton(){
+        text.AddComponent<MeshRenderer>();
 
-		GameObject button = new GameObject ("UIButton");
+        text.AddComponent<TextMesh>();
 
-		button.transform.position = new Vector3 (8.0f,4.25f,1.0f);
+        text.GetComponent<TextMesh>().text = "Score: ";
 
-		button.AddComponent<SpriteRenderer> ().sprite = Resources.Load ("start-button", typeof(Sprite)) as Sprite;
+        text.GetComponent<TextMesh>().fontSize = 80;
 
-		button.AddComponent<BoxCollider2D> ();
+    }
 
-		button.AddComponent<UIButton> ();
+    void MakeButton()
+    {
 
-	}
+        GameObject button = new GameObject("UIButton");
+
+        button.transform.position = new Vector3(8.0f, 4.25f, 1.0f);
+
+        button.AddComponent<SpriteRenderer>().sprite = Resources.Load("start-button", typeof(Sprite)) as Sprite;
+
+        button.AddComponent<BoxCollider2D>();
+
+        button.AddComponent<UIButton>();
+
+    }
 }

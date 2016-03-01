@@ -17,15 +17,15 @@ public class SetupControl : MonoBehaviour {
 
 	void MakeControlObject(){
 
-		GameObject control = new GameObject ();
-
-		control.name = "Control Object";
+		GameObject control = new GameObject ("Control Object");
 
 		control.AddComponent<ControlStart> ();
 
 		control.AddComponent<GameLogic> ();
 
 		control.AddComponent<MakeDeck> ();
+
+        control.AddComponent<Timer>();
 
 	}
 }
