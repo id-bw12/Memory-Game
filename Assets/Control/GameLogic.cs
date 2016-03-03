@@ -10,6 +10,8 @@ public class GameLogic : MonoBehaviour {
 
 	private int score = 0;
 
+	private bool checkingMatch = false;
+
 	private MemoryCard firstCard, secondCard;
 
 	// Use this for initialization
@@ -29,6 +31,9 @@ public class GameLogic : MonoBehaviour {
 		if (firstCard != null) {
 		
 			secondCard = card;
+
+			checkingMatch = true;
+
 			StartCoroutine (CheckMatch());
 
 		} else {
@@ -38,19 +43,24 @@ public class GameLogic : MonoBehaviour {
 
 	private IEnumerator CheckMatch(){
 
+		bool checkTime = this.GetComponent<Timer> ().Enable;
+
+		yield return new WaitForSeconds (6.0f);
+
 		if (secondCard.Image == firstCard.Image) {
 			score++;
 
 			scoreLabel.text = "Score: " + score;
 		} else {
-
-			yield return new WaitForSeconds (0.5f);
 			secondCard.FlipFaceDown ();
 			firstCard.FlipFaceDown ();
+
 		}
 	
 		secondCard = null;
 		firstCard = null;
+
+		checkingMatch = false;
 
 	}
 
@@ -58,6 +68,10 @@ public class GameLogic : MonoBehaviour {
 
 		SceneManager.LoadScene ("Memory_Scene");
 
+	}
+
+	public bool IsMatch(){
+		return checkingMatch;
 	}
 		
 }

@@ -6,26 +6,47 @@ public class Timer : MonoBehaviour {
 
     private System.Timers.Timer time;
 
-    private double timeLimit;
+	private MemoryCard card = null;
 
 	// Use this for initialization
 	public void Start () {
+		
         time = new System.Timers.Timer();
-        time.Elapsed += Time_Elapsed;
+		time.Elapsed += Time_Elapsed;
 	}
 
-    private void Time_Elapsed(object sender, System.Timers.ElapsedEventArgs e)
-    {
-        time.Enabled = false;
-    }
+	void Time_Elapsed (object sender, ElapsedEventArgs e)
+	{
+
+		time.Enabled = false;
+
+		StopAnimation ();
+
+
+	}
+
 
     // Update is called once per frame
-    void Update () {
+	void Update () {
+
+		if (time.Enabled) {
+
+			card.transform.Rotate (0.0f, -5.0f, 0.0f);
+
+			card.CardFlips (card.transform.rotation.eulerAngles.y);
+		}
 	
 	}
 
-    public void SetTimeLimit(int timeLimt) {
-        time.Interval = 4000;
+	private void StopAnimation(){
+
+		card.FlipFaceUp();
+
+		card = null;
+	}
+
+    public void SetTimeLimit() {
+		time.Interval = 4250;
     }
 
     public bool Enable {
@@ -33,7 +54,7 @@ public class Timer : MonoBehaviour {
         set { time.Enabled = value; }
     }
 
-    public void StartTimer() {
-        time.Start();
-    }
+	public void SetCard(MemoryCard card){
+		this.card = card;
+	}
 }

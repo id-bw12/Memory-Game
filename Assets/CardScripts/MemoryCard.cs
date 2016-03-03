@@ -11,14 +11,11 @@ public class MemoryCard : MonoBehaviour {
 
 	private Sprite card, backImage;
 
-    private bool cardFlip = false;
-
 	// Use this for initialization
 	void Start () {
 
         gameTimer = GameObject.Find("Control Object").GetComponent<Timer>();
 
-        gameTimer.enabled = false;
         backImage = this.gameObject.GetComponent<SpriteRenderer> ().sprite;
 		logic = GameObject.Find ("Control Object").GetComponent<GameLogic> ();
 
@@ -26,38 +23,24 @@ public class MemoryCard : MonoBehaviour {
 	
 	// Update is called once per frame
 	void Update () {
-
-        if (gameTimer.enabled)
-        {
-            this.transform.Rotate(0.0f, -5.0f, 0.0f);
-
-            CardFlips(this.transform.rotation.eulerAngles.y);
-        }
-        else
-            if (!gameTimer.enabled && cardFlip) {
-
-            this.transform.Rotate(0.0f, 0.0f, 0.0f);
-
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = card;
-
-            cardFlip = false;
-
-        }
 	
 	}
 
 	void OnMouseDown(){
+		
+		if(!gameTimer.Enable && !logic.IsMatch()){
+			
+	        gameTimer.SetTimeLimit();
 
-        gameTimer.SetTimeLimit(4000);
+			gameTimer.SetCard (this);
 
-        gameTimer.enabled = true;
+			gameTimer.Enable = true;
 
-        logic.CheckRevealedCards(this);
+	        logic.CheckRevealedCards(this);
+	    }
+	}
 
-        cardFlip = true;
-    }
-
-    void CardFlips( float yRotation) {
+    public void CardFlips( float yRotation) {
 
         int y = (int)yRotation;
 
@@ -80,5 +63,13 @@ public class MemoryCard : MonoBehaviour {
 	public void FlipFaceDown(){
 
 		this.gameObject.GetComponent<SpriteRenderer> ().sprite = backImage;
+
+		this.transform.Rotate(0.0f, 0.0f, 0.0f);
+	}
+
+	public void FlipFaceUp(){
+
+		this.gameObject.GetComponent<SpriteRenderer>().sprite = card;
+
 	}
 }
