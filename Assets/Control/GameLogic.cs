@@ -43,8 +43,6 @@ public class GameLogic : MonoBehaviour {
 
 	private IEnumerator CheckMatch(){
 
-		bool checkTime = this.GetComponent<Timer> ().Enable;
-
 		yield return new WaitForSeconds (6.0f);
 
 		if (secondCard.Image == firstCard.Image) {
