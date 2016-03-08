@@ -86,4 +86,7 @@ public class MakeDeck : MonoBehaviour {
 
 	}
 
+    public void GetDeck() {
+    }
+
 }

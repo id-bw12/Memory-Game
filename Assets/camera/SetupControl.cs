@@ -19,9 +19,11 @@ public class SetupControl : MonoBehaviour {
 
 		GameObject control = new GameObject ("Control Object");
 
-		control.AddComponent<ControlStart> ();
-
         control.AddComponent<MainMenu>();
+
+        control.AddComponent<ControlStart> ();
+
+        
 
 	}
 }

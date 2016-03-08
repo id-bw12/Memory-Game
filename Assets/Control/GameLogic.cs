@@ -8,7 +8,7 @@ public class GameLogic : MonoBehaviour {
 
 	[SerializeField] private TextMesh scoreLabel;
 
-	private int score = 0;
+	private int score = 0, missMatch = 0;
 
 	private bool checkingMatch = false;
 

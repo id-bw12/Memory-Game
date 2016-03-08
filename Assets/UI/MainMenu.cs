@@ -8,7 +8,7 @@ public class MainMenu : MonoBehaviour {
 
     private UIMakerScript menuMaker = new UIMakerScript();
 
-    private GameObject canvas, panel, text;
+    private GameObject canvas, text;
 
     // Use this for initialization
     void Start () {
@@ -17,11 +17,7 @@ public class MainMenu : MonoBehaviour {
 
         menuMaker.CreateEventSystem(canvas.transform);
 
-        panel = menuMaker.CreatePanel(canvas.transform);
-
         MakeMainMenu();
-
-        print(buttons.Count);
 
     }
 	
@@ -31,36 +27,22 @@ public class MainMenu : MonoBehaviour {
 	}
 
     void MakeMainMenu() {
-        
-        text = menuMaker.CreateText(panel.transform, 0, 50, 160, 50, "Memory Game", 14);
-  
-        buttons.Add(menuMaker.CreateButton(panel.transform, 0, 22, 125, 25, "Play", delegate { PlayGame(); }));
-        buttons.Add(menuMaker.CreateButton(panel.transform, 0, 2, 125, 25, "ID Info", delegate { IdInfo(); }));
-        buttons.Add(menuMaker.CreateButton(panel.transform, 0, -20, 125, 25, "Options", delegate { Options(); }));
-        buttons.Add(menuMaker.CreateButton(panel.transform, 0, -40, 125, 25, "Exit", delegate { Exit(); }));
+
+        GameObject mainMenupanel = menuMaker.CreatePanel(canvas.transform);
+
+        text = menuMaker.CreateText(mainMenupanel.transform, 0, 50, 160, 50, "Memory Game", 14);
+
+        buttons.Add(menuMaker.CreateButton(mainMenupanel.transform, 0, 22, 125, 25, "Play", delegate { PlayGame(mainMenupanel); }));
+        buttons.Add(menuMaker.CreateButton(mainMenupanel.transform, 0, 2, 125, 25, "ID Info", delegate { IdInfo(mainMenupanel); }));
+        buttons.Add(menuMaker.CreateButton(mainMenupanel.transform, 0, -20, 125, 25, "Options", delegate { Options(mainMenupanel); }));
+        buttons.Add(menuMaker.CreateButton(mainMenupanel.transform, 0, -40, 125, 25, "Exit", delegate { Exit(); }));
     }
 
-    void OptionsMenu() {
-
-
-        text = text = menuMaker.CreateText(panel.transform, 0, 50, 160, 50, "Options", 14);
-
-        buttons.Add(menuMaker.CreateButton(panel.transform, 0, 2, 125, 25, "back", delegate { Back(); }));
-
-    }
-
-    void PlayGame()
+    void PlayGame(GameObject panel)
     {
-        MakeScoreText();
+        DestoryPanel(panel);
 
-        MakeButton();
-
-        GameObject.Destroy(text);
-
-        for (int i = 0; i < buttons.Count; ++i)
-            GameObject.Destroy(buttons[i]);
-
-        GameObject.Destroy(panel);
+        this.gameObject.AddComponent<GameMode>();
 
         this.gameObject.AddComponent<GameLogic>();
 
@@ -70,41 +52,36 @@ public class MainMenu : MonoBehaviour {
 
     }
 
-    void IdInfo() {
-        GameObject.Destroy(text);
+    void IdInfo(GameObject panel) {
 
-        for (int i = 0; i < buttons.Count; ++i)
-            GameObject.Destroy(buttons[i]);
+        DestroyObject(panel);
 
-        text = text = menuMaker.CreateText(panel.transform, 0, 50, 160, 50, "Id Information", 14);
+        GameObject idPanel = menuMaker.CreatePanel(canvas.transform);
 
-        buttons.Add(menuMaker.CreateButton(panel.transform, 0, 2, 125, 25, "back", delegate { Back(); }));
+        text = menuMaker.CreateText(idPanel.transform, 0, 50, 160, 50, "Id Information", 14);
+        
+        buttons.Add(menuMaker.CreateButton(idPanel.transform, 0, 2, 125, 25, "back", delegate { Back(idPanel); }));
     }
 
-    void Options()
+    void Options(GameObject panel)
     {
-        GameObject.Destroy(text);
+        DestoryPanel(panel);
 
-        for(int i = 0; i < buttons.Count; ++i)
-            GameObject.Destroy(buttons[i]);
+        GameObject optionsPanel = menuMaker.CreatePanel(canvas.transform);
 
-        buttons.Clear();
+        text = menuMaker.CreateText(optionsPanel.transform, 0, 50, 160, 50, "Options", 14);
 
-        OptionsMenu();
+        buttons.Add(menuMaker.CreateButton(optionsPanel.transform, 0, 2, 125, 25, "back", delegate { Back(optionsPanel); }));
     }
 
     void Exit() {
-        UnityEditor.EditorApplication.Exit(0);
+        //UnityEditor.EditorApplication.Exit(0);
+        UnityEditor.EditorApplication.isPlaying = false;
     }
 
-    void Back() {
+    void Back(GameObject panel) {
 
-        GameObject.Destroy(text);
-
-        for (int i = 0; i < buttons.Count; ++i)
-            GameObject.Destroy(buttons[i]);
-
-        buttons.Clear();
+        DestoryPanel(panel);
 
         text = null;
 
@@ -112,39 +89,10 @@ public class MainMenu : MonoBehaviour {
     }
 
 
-    void MakeScoreText()
-    {
+     void DestoryPanel(GameObject panel) { 
 
-        GameObject text = new GameObject("Score Label");
+        GameObject.Destroy(panel);
 
-        text.transform.position = new Vector3(-8.75f, 4.65f, 1.0f);
-
-        text.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
-
-        text.AddComponent<MeshRenderer>();
-
-        text.AddComponent<TextMesh>();
-
-        text.GetComponent<TextMesh>().text = "Score: ";
-
-        text.GetComponent<TextMesh>().fontSize = 80;
-
+        buttons.Clear();
     }
-
-    void MakeButton()
-    {
-
-        GameObject button = new GameObject("UIButton");
-
-        button.transform.position = new Vector3(8.0f, 4.25f, 1.0f);
-
-        button.AddComponent<SpriteRenderer>().sprite = Resources.Load("start-button", typeof(Sprite)) as Sprite;
-
-        button.AddComponent<BoxCollider2D>();
-
-        button.AddComponent<UIButton>();
-
-    }
-
-
 }

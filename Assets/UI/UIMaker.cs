@@ -31,7 +31,7 @@ public class UIMakerScript : MonoBehaviour
         GameObject canvasObject = new GameObject("Canvas");
         canvasObject.layer = LayerUI;
 
-        RectTransform canvasTrans = canvasObject.AddComponent<RectTransform>();
+        canvasObject.AddComponent<RectTransform>().localScale = new Vector3(1.0f,2.0f,1.0f);
 
         Canvas canvas = canvasObject.AddComponent<Canvas>();
         canvas.renderMode = RenderMode.ScreenSpaceOverlay;
@@ -41,7 +41,7 @@ public class UIMakerScript : MonoBehaviour
         canvasScal.uiScaleMode = CanvasScaler.ScaleMode.ScaleWithScreenSize;
         canvasScal.referenceResolution = new Vector2(300, 200);
 
-        GraphicRaycaster canvasRayc = canvasObject.AddComponent<GraphicRaycaster>();
+        canvasObject.AddComponent<GraphicRaycaster>();
 
         canvasObject.transform.SetParent(parent);
 
@@ -80,13 +80,11 @@ public class UIMakerScript : MonoBehaviour
         trans.offsetMax = new Vector2(0, 0);
         trans.localPosition = new Vector3(0, 0, 0);
         trans.sizeDelta = new Vector2(0, 0);
-        trans.localScale = new Vector3(0.8f, 0.8f, 1.0f);
+        trans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
 
-        CanvasRenderer renderer = panelObject.AddComponent<CanvasRenderer>();
+        panelObject.AddComponent<CanvasRenderer>();
 
-        Image image = panelObject.AddComponent<Image>();
-
-        //image.sprite = UnityEditor.AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/Background.psd");
+        panelObject.AddComponent<Image>();
 
         return panelObject;
     }
@@ -100,13 +98,13 @@ public class UIMakerScript : MonoBehaviour
         textObject.layer = LayerUI;
 
         RectTransform trans = textObject.AddComponent<RectTransform>();
-        trans.sizeDelta.Set(w, h);
+        trans.sizeDelta = new Vector2(w, h);
         trans.anchoredPosition3D = new Vector3(0, 0, 0);
         trans.anchoredPosition = new Vector2(x, y);
         trans.localScale = new Vector3(1.0f, 1.0f, 1.0f);
         trans.localPosition.Set(0, 0, 0);
 
-        CanvasRenderer renderer = textObject.AddComponent<CanvasRenderer>();
+        textObject.AddComponent<CanvasRenderer>();
 
         Text text = textObject.AddComponent<Text>();
         text.supportRichText = true;
@@ -132,27 +130,20 @@ public class UIMakerScript : MonoBehaviour
 
         RectTransform trans = buttonObject.AddComponent<RectTransform>();
         SetSize(trans, new Vector2(w, h));
-        //trans.anchoredPosition3D = new Vector3(0, 0, 0);
         trans.anchoredPosition = new Vector2(x, y);
         trans.localScale = new Vector3(.50f, .50f, 1.0f);
-        trans.localPosition.Set(0, 0, 0);
-
-        //CanvasRenderer renderer = buttonObject.AddComponent<CanvasRenderer>();
+        trans.localPosition.Set(0, 0, 0);  
 
         buttonObject.AddComponent<CanvasRenderer>();
 
-        //Image image = buttonObject.AddComponent<Image>();
-
         buttonObject.AddComponent<Image>().color = Color.cyan;
-
-        //image.sprite = UnityEditor.AssetDatabase.GetBuiltinExtraResource<Sprite>("UI/Skin/UISprite.psd");
 
         Button button = buttonObject.AddComponent<Button>();
         button.interactable = true;
         button.onClick.AddListener(eventListner);
         
 
-        GameObject textObject = CreateText(buttonObject.transform, 0, 0, 0, 0,
+        CreateText(buttonObject.transform, 0, 0, 0, 34,
                                                    message, 24);
 
         return buttonObject;

@@ -1,4 +1,4 @@
 sceneSetups:
-- path: C:/Users/BT21129/Desktop/Eddie Meza P#3MM-progress/Assets/Memory_Scene.unity
+- path: C:/Users/BT21129/Desktop/Eddie, Ross, Wilson P#2TT UI/Eddie Menu/Assets/Menu_Scene.unity
   isLoaded: 1
   isActive: 1
