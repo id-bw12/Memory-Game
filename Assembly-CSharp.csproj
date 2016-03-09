@@ -50,7 +50,9 @@
      <Compile Include="Assets\Control\GameLogic.cs" />
      <Compile Include="Assets\Control\MakeDeck.cs" />
      <Compile Include="Assets\Timer\Timer.cs" />
+     <Compile Include="Assets\UI\MainMenu.cs" />
      <Compile Include="Assets\UI\UIButton.cs" />
+     <Compile Include="Assets\UI\UIMaker.cs" />
      <Compile Include="Assets\camera\SetupControl.cs" />
  <Reference Include="UnityEngine.UI">
  <HintPath>C:/Program Files/Unity/Editor/Data/UnityExtensions/Unity/GUISystem/UnityEngine.UI.dll</HintPath>

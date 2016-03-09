@@ -150,7 +150,6 @@ public class UIMakerScript : MonoBehaviour
         Button button = buttonObject.AddComponent<Button>();
         button.interactable = true;
         button.onClick.AddListener(eventListner);
-        
 
         GameObject textObject = CreateText(buttonObject.transform, 0, 0, 0, 0,
                                                    message, 24);

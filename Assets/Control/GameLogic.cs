@@ -64,7 +64,7 @@ public class GameLogic : MonoBehaviour {
 
 	public void Restart(){
 
-		SceneManager.LoadScene ("Memory_Scene");
+		SceneManager.LoadScene ("Menu_Scene");
 
 	}
 
