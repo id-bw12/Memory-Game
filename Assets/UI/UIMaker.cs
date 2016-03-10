@@ -84,7 +84,7 @@ public class UIMakerScript : MonoBehaviour
 
         panelObject.AddComponent<CanvasRenderer>();
 
-        panelObject.AddComponent<Image>();
+        panelObject.AddComponent<Image>().color = Color.black;
 
         return panelObject;
     }
@@ -113,7 +113,7 @@ public class UIMakerScript : MonoBehaviour
         text.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
         text.alignment = TextAnchor.MiddleCenter;
         text.horizontalOverflow = HorizontalWrapMode.Overflow;
-        text.color = new Color(0, 0, 1);
+        text.color = Color.green;
 
         return textObject;
     }
@@ -136,7 +136,7 @@ public class UIMakerScript : MonoBehaviour
 
         buttonObject.AddComponent<CanvasRenderer>();
 
-        buttonObject.AddComponent<Image>().color = Color.cyan;
+        buttonObject.AddComponent<Image>().color = Color.red;
 
         Button button = buttonObject.AddComponent<Button>();
         button.interactable = true;

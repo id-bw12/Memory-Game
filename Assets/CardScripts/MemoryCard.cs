@@ -16,7 +16,7 @@ public class MemoryCard : MonoBehaviour {
 	// Use this for initialization
 	void Start () {
 
-        gameTimer = GameObject.Find("Control Object").GetComponent<Timer>();
+        gameTimer = gameObject.AddComponent<Timer>();
 
         backCard = this.gameObject.GetComponent<SpriteRenderer> ().sprite;
 		logic = GameObject.Find ("Control Object").GetComponent<GameLogic> ();
@@ -39,13 +39,13 @@ public class MemoryCard : MonoBehaviour {
 
 	void OnMouseDown(){
 		
-		if(!gameTimer.Enable && !isSelected){
+		if(!isSelected && !logic.IsMatch() && !isMatched){
 
 			isSelected = true;
 
-	        gameTimer.SetTimeLimit();
+            gameTimer.SetTimeLimit();
 
-			gameTimer.Enable = true;
+            gameTimer.Enable = true;
 
 	        logic.CheckRevealedCards(this);
 	    }

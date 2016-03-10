@@ -8,6 +8,9 @@ using System.Collections;
 //03:20 P.M. - 03:51 P.M.
 //09:35 A.M. - 12:35 P.M.
 //09:35 A.M. - 12:16 P.M.
+//07:51 P.M. - 08:51 P.M.
+//09:35 A.M. - 12:35 P.M.
+//09:35 A.M. - 12:35 P.M.
 
 public class ControlStart : MonoBehaviour
 {
