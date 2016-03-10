@@ -48,6 +48,7 @@
      <Compile Include="Assets\CardScripts\MemoryCard.cs" />
      <Compile Include="Assets\Control\ControlStart.cs" />
      <Compile Include="Assets\Control\GameLogic.cs" />
+     <Compile Include="Assets\Control\GameMode.cs" />
      <Compile Include="Assets\Control\MakeDeck.cs" />
      <Compile Include="Assets\Timer\Timer.cs" />
      <Compile Include="Assets\UI\MainMenu.cs" />

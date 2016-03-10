@@ -12,10 +12,12 @@ using System.Collections;
 public class ControlStart : MonoBehaviour
 {
 
+    private int gameCount = 0;
+
     // Use this for initialization
     void Start()
     {
-        SetupBackgorund();
+   
 
     }
 
@@ -25,20 +27,11 @@ public class ControlStart : MonoBehaviour
 
     }
 
-    void SetupBackgorund()
-    {
+    public int GameNumber {
 
-        GameObject background = new GameObject("Background");
+        set { this.gameCount = value; }
 
-        Sprite backgroundSprite = Resources.Load("table_top", typeof(Sprite)) as Sprite;
-
-        background.transform.position = new Vector3(0.0f, 0.0f, 5f);
-
-        background.transform.localScale = new Vector3(2.0f, 2.0f, 1.0f);
-
-        background.AddComponent<SpriteRenderer>();
-
-        background.GetComponent<SpriteRenderer>().sprite = backgroundSprite;
-
-    }   
+        get { return this.gameCount; }
+        
+    }
 }

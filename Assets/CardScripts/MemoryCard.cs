@@ -9,30 +9,41 @@ public class MemoryCard : MonoBehaviour {
 
     private Timer gameTimer;
 
-	private Sprite card, backImage;
+	private Sprite faceCard, backCard;
+
+	private bool isSelected = false, isMatched = false;
 
 	// Use this for initialization
 	void Start () {
 
         gameTimer = GameObject.Find("Control Object").GetComponent<Timer>();
 
-        backImage = this.gameObject.GetComponent<SpriteRenderer> ().sprite;
+        backCard = this.gameObject.GetComponent<SpriteRenderer> ().sprite;
 		logic = GameObject.Find ("Control Object").GetComponent<GameLogic> ();
 
 	}
 	
 	// Update is called once per frame
 	void Update () {
-	
+
+		if (gameTimer.Enable && isSelected && !isMatched) {
+			this.transform.Rotate (0.0f, -2.75f, 0.0f);
+
+			CardFlips ();
+		} 
+		else 
+			if(isSelected)
+				isSelected = false;
+		
 	}
 
 	void OnMouseDown(){
 		
-		if(!gameTimer.Enable && !logic.IsMatch()){
-			
-	        gameTimer.SetTimeLimit();
+		if(!gameTimer.Enable && !isSelected){
 
-			gameTimer.SetCard (this);
+			isSelected = true;
+
+	        gameTimer.SetTimeLimit();
 
 			gameTimer.Enable = true;
 
@@ -40,36 +51,36 @@ public class MemoryCard : MonoBehaviour {
 	    }
 	}
 
-    public void CardFlips( float yRotation) {
+    private void CardFlips() {
 
-        int y = (int)yRotation;
+		int y = (int)transform.rotation.eulerAngles.y;
 
-        if (y >= 0 && y <= 90)
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = backImage;
-        else
-            if (y >= 90 && y <= 270)
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = card;
-        else
-            if (y >= 270 && y <= 360)
-            this.gameObject.GetComponent<SpriteRenderer>().sprite = backImage;
+		if (y >= 0 && y <= 89)
+			this.gameObject.GetComponent<SpriteRenderer> ().sprite = backCard;
+		else if (y >= 90 && y <= 269)
+			this.gameObject.GetComponent<SpriteRenderer> ().sprite = faceCard;
+		else if (y >= 270 && y <= 359)
+			this.gameObject.GetComponent<SpriteRenderer> ().sprite = backCard;
 
     }
 
-    public Sprite Image{
-		get{ return this.card;}
-		set{ this.card = value;}
+   public Sprite Image{
+		get{ return this.faceCard;}
+		set{ this.faceCard = value;}
 	}
 
 	public void FlipFaceDown(){
 
-		this.gameObject.GetComponent<SpriteRenderer> ().sprite = backImage;
+		isSelected = true;
 
-		this.transform.Rotate(0.0f, 0.0f, 0.0f);
+		gameTimer.Enable = true;
 	}
 
 	public void FlipFaceUp(){
 
-		this.gameObject.GetComponent<SpriteRenderer>().sprite = card;
+		this.gameObject.GetComponent<SpriteRenderer>().sprite = faceCard;
+
+		isMatched = true;
 
 	}
 }

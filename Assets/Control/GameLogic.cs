@@ -8,7 +8,7 @@ public class GameLogic : MonoBehaviour {
 
 	[SerializeField] private TextMesh scoreLabel;
 
-	private int score = 0;
+	private int score = 0, missMatch = 0;
 
 	private bool checkingMatch = false;
 
@@ -34,16 +34,19 @@ public class GameLogic : MonoBehaviour {
 
 			checkingMatch = true;
 
+			print (card.Image);
+
 			StartCoroutine (CheckMatch());
 
 		} else {
+			print (card.Image);
 			firstCard = card;
 		}
 	}
 
 	private IEnumerator CheckMatch(){
 
-		yield return new WaitForSeconds (6.0f);
+		yield return new WaitForSeconds (1.5f);
 
 		if (secondCard.Image == firstCard.Image) {
 			score++;
@@ -52,6 +55,11 @@ public class GameLogic : MonoBehaviour {
 		} else {
 			secondCard.FlipFaceDown ();
 			firstCard.FlipFaceDown ();
+
+			secondCard = null;
+			firstCard = null;
+
+			yield return new WaitForSeconds (1.5f);
 
 		}
 	
