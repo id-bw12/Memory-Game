@@ -65,7 +65,7 @@ public class UIMakerScript : MonoBehaviour
         return esObject;
     }
 
-    public GameObject CreatePanel(Transform parent)
+	public GameObject CreatePanel(Transform parent, Sprite background)
     {
         GameObject panelObject = new GameObject("Panel");
         panelObject.transform.SetParent(parent);
@@ -84,7 +84,7 @@ public class UIMakerScript : MonoBehaviour
 
         panelObject.AddComponent<CanvasRenderer>();
 
-        panelObject.AddComponent<Image>().color = Color.black;
+		panelObject.AddComponent<Image> ().sprite = background;
 
         return panelObject;
     }

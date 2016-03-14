@@ -6,7 +6,7 @@ using System.Collections;
 
 public class GameLogic : MonoBehaviour {
 
-	[SerializeField] private TextMesh scoreLabel;
+	[SerializeField] private TextMesh scoreLabel, missLabel;
 
 	private int score = 0, missMatch = 0;
 
@@ -18,7 +18,7 @@ public class GameLogic : MonoBehaviour {
 	void Start () {
 	
 		scoreLabel = GameObject.Find ("Score Label").GetComponent<TextMesh> ();
-
+		missLabel = GameObject.Find ("Miss Label").GetComponent <TextMesh> ();
 	}
 	
 	// Update is called once per frame
@@ -34,19 +34,16 @@ public class GameLogic : MonoBehaviour {
 
 			checkingMatch = true;
 
-			print (card.Image);
-
 			StartCoroutine (CheckMatch());
 
 		} else {
-			print (card.Image);
 			firstCard = card;
 		}
 	}
 
 	private IEnumerator CheckMatch(){
 
-		yield return new WaitForSeconds (3.0f);
+		yield return new WaitForSeconds (2.5f);
 
 		if (secondCard.Image == firstCard.Image) {
 
@@ -62,7 +59,9 @@ public class GameLogic : MonoBehaviour {
 
             missMatch++;
 
-			yield return new WaitForSeconds (3.0f);
+			missLabel.text = "Miss: " + missMatch;
+
+			yield return new WaitForSeconds (1.5f);
 
 		}
 	

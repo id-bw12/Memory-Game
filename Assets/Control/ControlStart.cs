@@ -27,7 +27,7 @@ public class ControlStart : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
+		
     }
 
     public int GameNumber {
@@ -37,4 +37,6 @@ public class ControlStart : MonoBehaviour
         get { return this.gameCount; }
         
     }
+
+
 }

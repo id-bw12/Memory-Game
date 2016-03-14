@@ -43,7 +43,7 @@ public class MemoryCard : MonoBehaviour {
 
 			isSelected = true;
 
-            gameTimer.SetTimeLimit();
+			gameTimer.SetTimeLimit();
 
             gameTimer.Enable = true;
 
@@ -73,6 +73,8 @@ public class MemoryCard : MonoBehaviour {
 
 		isSelected = true;
 
+		gameTimer.SetTimeLimit();
+
 		gameTimer.Enable = true;
 	}
 
@@ -82,5 +84,13 @@ public class MemoryCard : MonoBehaviour {
 
 		isMatched = true;
 
+	}
+
+	public void ToggleCards(bool isFlip){
+	
+		if(isFlip)
+			this.gameObject.GetComponent<SpriteRenderer>().sprite = faceCard;
+		else
+			this.gameObject.GetComponent<SpriteRenderer>().sprite = backCard;
 	}
 }
