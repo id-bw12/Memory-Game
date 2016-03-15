@@ -7,24 +7,32 @@ public class MakeDeck : MonoBehaviour {
 
 	private List<GameObject> deck = new List<GameObject> ();
 
-	private Sprite[] cardImages = new Sprite[4];
+	private Sprite[] cardImages = new Sprite[8];
 
 	// Use this for initialization
 	void Start () {
 
-		float x = -8.0f, y = 2.0f, z = 2.0f;
+		float x = -8.5f, y = 3.0f, z = 2.0f;
 	
 		LoadCardImages ();
 	
-		for (int i = 0; i < 8; ++i) {
+		for (int i = 0; i < 16; ++i) {
 
-			MakeMemoryCard (cardImages [i % 4], new Vector3 (x, y, z));
+			MakeMemoryCard (cardImages [i % 8], new Vector3 (x, y, z));
 
-			x += 3.0f;
+			x += 2.5f;
 
 			if (i == 3) {
-				y = -1.0f;
-				x = -8.0f;
+				y = 0.5f;
+				x = -8.5f;
+			} else if (i == 7) {
+				y = -2.0f;
+				x = -8.5f;
+				
+			} else if (i == 11) {
+				y = -4.5f;
+				x = -8.5f;
+
 			}
 		}
 
@@ -42,6 +50,10 @@ public class MakeDeck : MonoBehaviour {
 		cardImages [1] = Resources.Load ("frost", typeof(Sprite)) as Sprite;
 		cardImages [2] = Resources.Load ("lighting", typeof(Sprite)) as Sprite;
 		cardImages [3] = Resources.Load ("eel", typeof(Sprite)) as Sprite;
+		cardImages [4] = Resources.Load ("bees", typeof(Sprite)) as Sprite;
+		cardImages [5] = Resources.Load ("alarm", typeof(Sprite)) as Sprite;
+		cardImages [6] = Resources.Load ("anger", typeof(Sprite)) as Sprite;
+		cardImages [7] = Resources.Load ("telekinesis", typeof(Sprite)) as Sprite;
 	}
 
 	void MakeMemoryCard(Sprite cardImage , Vector3 position){
@@ -74,7 +86,7 @@ public class MakeDeck : MonoBehaviour {
 
 		int j;
 
-		for(int i = 0; i < 8; ++i){
+		for(int i = 0; i < 16; ++i){
 
 			tempSprite = deck[i].gameObject.GetComponent<MemoryCard>().Image;
 

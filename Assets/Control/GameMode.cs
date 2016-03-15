@@ -12,8 +12,6 @@ public class GameMode : MonoBehaviour {
 
 	private GameObject dateTime;
 
-	private bool isFlip = false;
-
 	// Use this for initialization
 	void Start () {
 
@@ -22,6 +20,8 @@ public class GameMode : MonoBehaviour {
 		ui = new UIMakerScript ();
 
         SetupBackgorund();
+
+		MakeGameNumber ();
 
         MakeScoreText();
 
@@ -34,6 +34,8 @@ public class GameMode : MonoBehaviour {
 		buttons.Add(MakeToggleButton ());
 
 		buttons.Add(MakeShuffleButton ());
+
+		buttons.Add (MakebackButton ());
 
 	}
 
@@ -59,12 +61,29 @@ public class GameMode : MonoBehaviour {
 
 	}
 
+	void MakeGameNumber(){
+	
+		GameObject text = new GameObject("Game Label");
+
+		text.transform.position = new Vector3(-12.75f, 5.0f, 1.0f);
+
+		text.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
+
+		text.AddComponent<MeshRenderer>();
+
+		text.AddComponent<TextMesh>();
+
+		text.GetComponent<TextMesh>().text = "Game: 0";
+
+		text.GetComponent<TextMesh>().fontSize = 80;
+	}
+
     void MakeScoreText()
     {
 
         GameObject text = new GameObject("Score Label");
 
-        text.transform.position = new Vector3(-8.75f, 4.65f, 1.0f);
+        text.transform.position = new Vector3(-6.75f, 5.0f, 1.0f);
 
         text.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
 
@@ -72,7 +91,7 @@ public class GameMode : MonoBehaviour {
 
         text.AddComponent<TextMesh>();
 
-        text.GetComponent<TextMesh>().text = "Score: ";
+        text.GetComponent<TextMesh>().text = "Score: 0";
 
         text.GetComponent<TextMesh>().fontSize = 80;
 
@@ -82,7 +101,7 @@ public class GameMode : MonoBehaviour {
 		
 		GameObject text = new GameObject("Miss Label");
 
-		text.transform.position = new Vector3(-4.75f, 4.65f, 1.0f);
+		text.transform.position = new Vector3(-2.75f, 5.0f, 1.0f);
 
 		text.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
 
@@ -90,7 +109,7 @@ public class GameMode : MonoBehaviour {
 
 		text.AddComponent<TextMesh>();
 
-		text.GetComponent<TextMesh>().text = "Miss: ";
+		text.GetComponent<TextMesh>().text = "Miss: 0";
 
 		text.GetComponent<TextMesh>().fontSize = 80;
 	}
@@ -161,20 +180,40 @@ public class GameMode : MonoBehaviour {
 		return button;
 	}
 
+	GameObject MakebackButton (){
+		GameObject canvas = GameObject.Find ("Canvas");
+
+		GameObject button = ui.CreateButton (canvas.transform, 80, -40, 100, 28, "Back", delegate {BacktoMainMenu();});
+
+		button.GetComponent<Image> ().color = Color.cyan;
+
+		button.GetComponentInChildren<Text> ().color = Color.gray;
+
+		return button;
+	}
+
 	void StartGame(){
+		
+		var deck = gameObject.GetComponent<MakeDeck> ().GetDeck ();
+
+		bool isFlip = this.gameObject.GetComponent<ControlStart> ().Fliped;
 
 		buttons [1].GetComponent<Button> ().enabled = false;
 		buttons [2].GetComponent<Button> ().enabled = false;
 
-		var deck = gameObject.GetComponent<MakeDeck> ().GetDeck ();
-
-		if (isFlip)
+		if (isFlip) {
 			isFlip = false;
+			this.GetComponent<ControlStart> ().Fliped = isFlip;
+		}
 
 		for (int i = 0; i < deck.Count; i++) {
 			deck [i].GetComponent<BoxCollider2D> ().enabled = true;
 			deck [i].GetComponent<MemoryCard> ().ToggleCards (isFlip);
 		}
+
+		this.GetComponent<ControlStart> ().GameNumber += 1;
+
+		GameObject.Find ("Game Label").GetComponent<TextMesh> ().text = "Game: " + this.GetComponent<ControlStart> ().GameNumber;
 	}
 
 	void ShowCards(){
@@ -183,6 +222,8 @@ public class GameMode : MonoBehaviour {
 
 		var bttnText = buttons [1].GetComponentInChildren<Text> ();
 
+		var isFlip = this.gameObject.GetComponent<ControlStart> ().Fliped;
+
 		if (isFlip) {
 			isFlip = false;
 			bttnText.text = "Display";
@@ -190,21 +231,67 @@ public class GameMode : MonoBehaviour {
 			isFlip = true;
 			bttnText.text = "Hide";
 		}
-		for (int i = 0; i < deck.Count; i++){
+
+		this.GetComponent<ControlStart> ().Fliped = isFlip;
+
+		for (int i = 0; i < deck.Count; i++)
 				deck [i].GetComponent<MemoryCard> ().ToggleCards (isFlip);
-		}
-
-
+		
 	}
 
-	void ShuffleCards(){
-		gameObject.GetComponent<MakeDeck> ().ShuffleImages();
+	void ShuffleCards ()
+	{
+		gameObject.GetComponent<MakeDeck> ().ShuffleImages ();
 
 		var deck = gameObject.GetComponent<MakeDeck> ().GetDeck ();
 
+		var isFlip = this.gameObject.GetComponent<ControlStart> ().Fliped;
+
 		if (isFlip)
 			for (int i = 0; i < deck.Count; i++)
-					deck [i].GetComponent<MemoryCard> ().ToggleCards (isFlip);
+				deck [i].GetComponent<MemoryCard> ().ToggleCards (isFlip);
 	
-}
+	}
+
+	void BacktoMainMenu(){
+
+		ClearScreen ();
+
+		this.gameObject.AddComponent<MainMenu>();
+	
+		Destroy (this.GetComponent<MakeDeck>());
+
+		Destroy (this.GetComponent<GameLogic>());
+
+		Destroy (this.GetComponent<GameMode>());
+	}
+
+	void ClearScreen(){
+	
+		List<GameObject> deck = this.GetComponent<MakeDeck> ().GetDeck ();
+
+		GameObject.Destroy (GameObject.Find("Background"));
+
+		GameObject.Destroy (GameObject.Find("Date Label"));
+
+		GameObject.Destroy (GameObject.Find("Score Label"));
+
+		GameObject.Destroy (GameObject.Find("Miss Label"));
+
+		for (int i = 0; i < deck.Count; ++i)
+			GameObject.Destroy (deck [i]);
+
+		GameObject.Destroy (GameObject.Find ("Canvas"));
+
+		deck.Clear ();
+
+		buttons.Clear ();
+	}
+
+	public void ToggleButtons(){
+
+		buttons [1].gameObject.GetComponent<Button> ().enabled = true;
+		buttons [2].gameObject.GetComponent<Button> ().enabled = true;
+	
+	}
 }

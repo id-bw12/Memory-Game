@@ -1,5 +1,7 @@
-﻿using UnityEngine;
+using UnityEngine;
 using UnityEngine.UI;
+
+using UnityEditor;
 
 using System.Collections;
 using System.Collections.Generic;
@@ -66,7 +68,19 @@ public class MainMenu : MonoBehaviour {
 
 		DestoryPanel (panel);
 
+		string message = "The player starts the game by hitting the start button and selecting a card.\n"
+		                 + " The cards are not shuffled. To shuffle hit the shuffle button on the right\n"
+		                 + " side of the screen. There 8 pairs of cards to match with a sound effect\n"
+		                 + " for each match or mismatch. For every match the player gets one point. The\n"
+		                 + " miss matchs are also counted. The game ends when the all card are matched\n"
+		                 + " with another card of the same image. To start another game hit the start\n"
+		                 + " again.\n";
+
 		GameObject instructPanel = menuMaker.CreatePanel(canvas.transform, background);
+
+		GameObject instructText = menuMaker.CreateText (instructPanel.transform, -50,00,100,100, message,8);
+
+		instructText.GetComponent<Text> ().alignment = TextAnchor.MiddleLeft;
 
 		dateText = menuMaker.CreateText (instructPanel.transform, 100, -50, 100, 25, System.DateTime.Now.ToString(), 8);
 
@@ -163,6 +177,11 @@ public class MainMenu : MonoBehaviour {
     }
 
     void Exit() {
+
+		this.GetComponent<ControlStart> ().PlayFarewellMusic ();
+
+		EditorUtility.DisplayDialog ("Farewell", "Thank you playing Eddie's Memory Game.", "Exit");
+
         UnityEditor.EditorApplication.isPlaying = false;
     }
 

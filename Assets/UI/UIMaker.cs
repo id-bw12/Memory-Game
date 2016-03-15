@@ -111,9 +111,9 @@ public class UIMakerScript : MonoBehaviour
         text.text = message;
         text.fontSize = fontSize;
         text.font = Resources.GetBuiltinResource(typeof(Font), "Arial.ttf") as Font;
-        text.alignment = TextAnchor.MiddleCenter;
+		text.alignment = TextAnchor.MiddleCenter;
         text.horizontalOverflow = HorizontalWrapMode.Overflow;
-        text.color = Color.green;
+		text.color = Color.white;
 
         return textObject;
     }

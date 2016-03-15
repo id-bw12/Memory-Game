@@ -2,6 +2,7 @@
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
+using UnityEditor;
 using System.Collections;
 
 public class GameLogic : MonoBehaviour {
@@ -50,10 +51,18 @@ public class GameLogic : MonoBehaviour {
             firstCard.FlipFaceUp();
             secondCard.FlipFaceUp();
 
+			EditorUtility.DisplayDialog ("Match", "Its a match", "Okay");
+
 			score++;
 
 			scoreLabel.text = "Score: " + score;
+
+
+
 		} else {
+
+			EditorUtility.DisplayDialog ("Miss Match", "Its a miss match", "Okay");
+
 			secondCard.FlipFaceDown ();
 			firstCard.FlipFaceDown ();
 
@@ -65,11 +74,25 @@ public class GameLogic : MonoBehaviour {
 
 		}
 	
+		CheckWinConditions ();
+
 		secondCard = null;
 		firstCard = null;
 
 		checkingMatch = false;
 
+	}
+
+	private void CheckWinConditions(){
+
+		if (score == 8) {
+			this.GetComponent<ControlStart> ().Fliped = true;
+
+			this.GetComponent<GameMode> ().ToggleButtons ();
+
+			EditorUtility.DisplayDialog ("Game over", "Game over. Hit the start button to play again.", "Okay");
+
+		}
 	}
 
 	public void Restart(){
@@ -82,4 +105,15 @@ public class GameLogic : MonoBehaviour {
 		return checkingMatch;
 	}
 		
+	public int Score{
+		get { return score;}
+		set{ score = value;}
+	}
+
+	public int Misses{
+	
+		get { return missMatch;}
+		set{ missMatch = value;}
+	}
+
 }

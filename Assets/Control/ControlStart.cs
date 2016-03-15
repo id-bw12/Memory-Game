@@ -17,10 +17,20 @@ public class ControlStart : MonoBehaviour
 
     private int gameCount = 0;
 
+	private bool isFlip = false;
+
+	private string backgroundMusic = "BioShock Soundtrack_ 02 Welcome to Rapture",
+	farewellMusic = "Bioshock Credits [720p]", matchMusic = "", missmusic = "";
+
     // Use this for initialization
     void Start()
     {
    
+		this.gameObject.AddComponent<AudioSource> ().clip = Resources.Load(backgroundMusic,typeof(AudioClip))as AudioClip;
+
+		this.gameObject.GetComponent<AudioSource> ().loop = true;
+
+		this.GetComponent<AudioSource> ().Play();
 
     }
 
@@ -38,5 +48,26 @@ public class ControlStart : MonoBehaviour
         
     }
 
+
+	public bool Fliped{
+
+		set{ this.isFlip = value; }
+
+		get{ return this.isFlip;}
+
+	}
+
+
+
+	public void PlayFarewellMusic(){
+	
+		this.GetComponent<AudioSource> ().Stop();
+
+		this.GetComponent<AudioSource> ().clip = Resources.Load(farewellMusic,typeof(AudioClip))as AudioClip;
+
+		this.GetComponent<AudioSource> ().loop = true;
+
+		this.GetComponent<AudioSource> ().Play();
+	}
 
 }
