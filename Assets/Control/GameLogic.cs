@@ -55,9 +55,9 @@ public class GameLogic : MonoBehaviour {
 
             EditorUtility.DisplayDialog ("Match", "Its a match", "Okay");
 
-			score++;
+			this.GetComponent<ControlStart>().Matchs += 1;
 
-			scoreLabel.text = "Score: " + score;
+			scoreLabel.text = "Matchs: " + this.GetComponent<ControlStart>().Matchs;
 
 
 
@@ -70,9 +70,9 @@ public class GameLogic : MonoBehaviour {
 			secondCard.FlipFaceDown ();
 			firstCard.FlipFaceDown ();
 
-            missMatch++;
+            this.GetComponent<ControlStart>().MissMatchs += 1;
 
-			missLabel.text = "Miss: " + missMatch;
+            missLabel.text = "Miss: " + this.GetComponent<ControlStart>().MissMatchs;
 
 			yield return new WaitForSeconds (1.5f);
 

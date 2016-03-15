@@ -174,7 +174,8 @@ public class MainMenu : MonoBehaviour {
 			"Star 1: Instead of using cards from the book, find really dazzling ones.\n"+
 			"Star 2: Also display the current date and time.\n"+
 			"Star 3(2): Add a 'toggle' button for displaying/hiding all cards.\n"+
-			"Star 4(3): Generate 'everything' during run-time, not in the design mode";
+			"Star 4(3): Generate 'everything' during run-time, not in the design mode\n\n"+
+            "Total stars:7";
 
 		text.GetComponent<Text> ().text = message;
 

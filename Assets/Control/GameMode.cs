@@ -95,7 +95,7 @@ public class GameMode : MonoBehaviour {
 
         text.AddComponent<TextMesh>();
 
-        text.GetComponent<TextMesh>().text = "Score: 0";
+        text.GetComponent<TextMesh>().text = "Matchs: 0";
 
         text.GetComponent<TextMesh>().fontSize = 80;
 
@@ -131,21 +131,6 @@ public class GameMode : MonoBehaviour {
         dateTime.AddComponent<TextMesh>().text = System.DateTime.Now.ToString();
 
         dateTime.GetComponent<TextMesh>().fontSize = 60;
-
-    }
-
-    void MakeRestartButton()
-    {
-
-        GameObject button = new GameObject("UIButton");
-
-        button.transform.position = new Vector3(8.0f, 4.25f, 1.0f);
-
-        button.AddComponent<SpriteRenderer>().sprite = Resources.Load("start-button", typeof(Sprite)) as Sprite;
-
-        button.AddComponent<BoxCollider2D>();
-
-        button.AddComponent<UIButton>();
 
     }
 
@@ -223,8 +208,16 @@ public class GameMode : MonoBehaviour {
 
 		this.GetComponent<ControlStart> ().GameNumber += 1;
 
-		GameObject.Find ("Game Label").GetComponent<TextMesh> ().text = "Game: " + this.GetComponent<ControlStart> ().GameNumber;
-	}
+        this.GetComponent<ControlStart>().Matchs = 0;
+
+        this.GetComponent<ControlStart>().MissMatchs = 0;
+
+        GameObject.Find ("Game Label").GetComponent<TextMesh> ().text = "Game: " + this.GetComponent<ControlStart> ().GameNumber;
+
+        GameObject.Find("Score Label").GetComponent<TextMesh>().text  = "Matchs: 0";
+
+        GameObject.Find("Miss Label").GetComponent<TextMesh>().text = "Miss: 0";
+    }
 
 	void ShowCards(){
 

@@ -18,7 +18,7 @@ using System.Collections;
 public class ControlStart : MonoBehaviour
 {
 
-    private int gameCount = 0;
+    private int gameCount = 0, matchs = 0, missMatch = 0;
 
 	private bool isFlip = false;
 
@@ -64,8 +64,21 @@ public class ControlStart : MonoBehaviour
         
     }
 
+    public int Matchs {
 
-	public bool Fliped{
+        set { this.matchs = value; }
+        get { return this.matchs; }
+    }
+
+    public int MissMatchs
+    {
+
+        set { this.missMatch = value; }
+        get { return this.missMatch; }
+    }
+
+
+    public bool Fliped{
 
 		set{ this.isFlip = value; }
 
