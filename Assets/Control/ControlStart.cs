@@ -23,9 +23,11 @@ public class ControlStart : MonoBehaviour
 	private bool isFlip = false;
 
 	private string backgroundMusic = "BioShock Soundtrack_ 02 Welcome to Rapture",
-	farewellMusic = "Bioshock Credits [720p]", matchMusic = "", missmusic = "";
+	farewellMusic = "Bioshock Credits [720p]", matchMusic = "Welcome To The Circus Of Value!", missmusic = "EL AMMO BANDITO SENIOR";
 
 	private AudioClip farewellClip;
+
+    private AudioSource soundEffects;
 
     // Use this for initialization
     void Start()
@@ -38,6 +40,13 @@ public class ControlStart : MonoBehaviour
 		this.gameObject.GetComponent<AudioSource> ().loop = true;
 
 		this.GetComponent<AudioSource> ().Play();
+
+        this.GetComponent<AudioSource>().Play(44100);
+
+        soundEffects = this.gameObject.AddComponent<AudioSource>();
+
+        soundEffects.volume = soundEffects.volume / 2;
+
 
     }
 
@@ -75,7 +84,24 @@ public class ControlStart : MonoBehaviour
 		this.GetComponent<AudioSource> ().loop = true;
 
 		this.GetComponent<AudioSource> ().Play();
-		
-	}
+
+        this.GetComponent<AudioSource>().Play(44100);
+    }
+
+
+    public void PlaySoundEffects(bool match) {
+
+        if (match)
+            soundEffects.clip = Resources.Load(matchMusic, typeof(AudioClip)) as AudioClip;
+        else
+            soundEffects.clip = Resources.Load(missmusic, typeof(AudioClip)) as AudioClip;
+
+        soundEffects.Play();
+
+        soundEffects.Play(44100);
+
+    }
+   
+
 
 }

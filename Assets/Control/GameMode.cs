@@ -1,6 +1,9 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+using UnityEngine.Events;
+using UnityEngine.EventSystems;
+
 using System.Collections;
 using System.Collections.Generic;
 
@@ -8,20 +11,20 @@ public class GameMode : MonoBehaviour {
 
 	private UIMakerScript ui;
 
-	private List<GameObject> buttons = new List<GameObject> ();
+    private GameObject dateTime;
 
-	private GameObject dateTime;
+    private List<GameObject> buttons = new List<GameObject> ();
 
 	// Use this for initialization
 	void Start () {
 
-		dateTime = new GameObject ("Date Label");
-
 		ui = new UIMakerScript ();
+
+        dateTime = new GameObject("Date Label");
 
         SetupBackgorund();
 
-		MakeGameNumber ();
+        MakeGameNumber ();
 
         MakeScoreText();
 
@@ -36,47 +39,48 @@ public class GameMode : MonoBehaviour {
 		buttons.Add(MakeShuffleButton ());
 
 		buttons.Add (MakebackButton ());
-
 	}
 
-	void Update(){
-		
-		dateTime.GetComponent<TextMesh> ().text = System.DateTime.Now.ToString();
-	}
+    void Update()
+    {
 
-	void SetupBackgorund()
-	{
+        dateTime.GetComponent<TextMesh>().text = System.DateTime.Now.ToString();
+    }
 
-		GameObject background = new GameObject("Background");
+    void SetupBackgorund()
+    {
 
-		Sprite backgroundSprite = Resources.Load ("1-01-E-01", typeof(Sprite))as Sprite;
+        GameObject background = new GameObject("Background");
 
-		background.transform.position = new Vector3(0.0f, 0.0f, 5f);
+        Sprite backgroundSprite = Resources.Load("1-01-E-01", typeof(Sprite)) as Sprite;
 
-		background.transform.localScale = new Vector3(2.0f, 2.0f, 1.0f);
+        background.transform.position = new Vector3(0.0f, 0.0f, 5f);
 
-		background.AddComponent<SpriteRenderer>();
+        background.transform.localScale = new Vector3(2.0f, 2.0f, 1.0f);
 
-		background.GetComponent<SpriteRenderer>().sprite = backgroundSprite;
+        background.AddComponent<SpriteRenderer>();
 
-	}
+        background.GetComponent<SpriteRenderer>().sprite = backgroundSprite;
 
-	void MakeGameNumber(){
-	
-		GameObject text = new GameObject("Game Label");
+    }
 
-		text.transform.position = new Vector3(-12.75f, 5.0f, 1.0f);
+    void MakeGameNumber()
+    {
 
-		text.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
+        GameObject text = new GameObject("Game Label");
 
-		text.AddComponent<MeshRenderer>();
+        text.transform.position = new Vector3(-12.75f, 5.0f, 1.0f);
 
-		text.AddComponent<TextMesh>();
+        text.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
 
-		text.GetComponent<TextMesh>().text = "Game: 0";
+        text.AddComponent<MeshRenderer>();
 
-		text.GetComponent<TextMesh>().fontSize = 80;
-	}
+        text.AddComponent<TextMesh>();
+
+        text.GetComponent<TextMesh>().text = "Game: 0";
+
+        text.GetComponent<TextMesh>().fontSize = 80;
+    }
 
     void MakeScoreText()
     {
@@ -97,38 +101,40 @@ public class GameMode : MonoBehaviour {
 
     }
 
-	void MakeMissText(){
-		
-		GameObject text = new GameObject("Miss Label");
+    void MakeMissText()
+    {
 
-		text.transform.position = new Vector3(-2.75f, 5.0f, 1.0f);
+        GameObject text = new GameObject("Miss Label");
 
-		text.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
+        text.transform.position = new Vector3(-2.75f, 5.0f, 1.0f);
 
-		text.AddComponent<MeshRenderer>();
+        text.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
 
-		text.AddComponent<TextMesh>();
+        text.AddComponent<MeshRenderer>();
 
-		text.GetComponent<TextMesh>().text = "Miss: 0";
+        text.AddComponent<TextMesh>();
 
-		text.GetComponent<TextMesh>().fontSize = 80;
-	}
+        text.GetComponent<TextMesh>().text = "Miss: 0";
 
-	void MakeDateTime(){
+        text.GetComponent<TextMesh>().fontSize = 80;
+    }
 
-		dateTime.transform.position = new Vector3 (3.0f, 4.75f, 1.0f);
+    void MakeDateTime()
+    {
 
-		dateTime.transform.localScale = new Vector3 (0.1f, 0.1f, 1.0f);
+        dateTime.transform.position = new Vector3(3.0f, 4.75f, 1.0f);
 
-		dateTime.AddComponent<MeshRenderer> ();
+        dateTime.transform.localScale = new Vector3(0.1f, 0.1f, 1.0f);
 
-		dateTime.AddComponent<TextMesh> ().text = System.DateTime.Now.ToString ();
+        dateTime.AddComponent<MeshRenderer>();
 
-		dateTime.GetComponent<TextMesh> ().fontSize = 60;
+        dateTime.AddComponent<TextMesh>().text = System.DateTime.Now.ToString();
 
-	}
+        dateTime.GetComponent<TextMesh>().fontSize = 60;
 
-	void MakeRestartButton()
+    }
+
+    void MakeRestartButton()
     {
 
         GameObject button = new GameObject("UIButton");
@@ -143,56 +149,60 @@ public class GameMode : MonoBehaviour {
 
     }
 
-	GameObject MakePlayButton(){
-		GameObject canvas = GameObject.Find ("Canvas");
+    GameObject MakePlayButton()
+    {
+        GameObject canvas = GameObject.Find("Canvas");
 
-		GameObject button = ui.CreateButton (canvas.transform, 80, 20, 100, 28, "Start", delegate {StartGame ();});
+        GameObject button = ui.CreateButton(canvas.transform, 80, 20, 100, 28, "Start", delegate { StartGame(); });
 
-		button.GetComponent<Image> ().color = Color.cyan;
+        button.GetComponent<Image>().color = Color.cyan;
 
-		button.GetComponentInChildren<Text> ().color = Color.gray;
+        button.GetComponentInChildren<Text>().color = Color.gray;
 
-		return button;
-	}
+        return button;
+    }
 
-	GameObject MakeToggleButton (){
-		GameObject canvas = GameObject.Find ("Canvas");
+    GameObject MakeToggleButton()
+    {
+        GameObject canvas = GameObject.Find("Canvas");
 
-		GameObject button = ui.CreateButton (canvas.transform, 80, 00, 100, 28, "Display", delegate {ShowCards ();});
+        GameObject button = ui.CreateButton(canvas.transform, 80, 00, 100, 28, "Display", delegate { ShowCards(); });
 
-		button.GetComponent<Image> ().color = Color.cyan;
+        button.GetComponent<Image>().color = Color.cyan;
 
-		button.GetComponentInChildren<Text> ().color = Color.gray;
+        button.GetComponentInChildren<Text>().color = Color.gray;
 
-		return button;
+        return button;
 
-	}
+    }
 
-	GameObject MakeShuffleButton(){
-		GameObject canvas = GameObject.Find ("Canvas");
+    GameObject MakeShuffleButton()
+    {
+        GameObject canvas = GameObject.Find("Canvas");
 
-		GameObject button = ui.CreateButton (canvas.transform, 80, -20, 100, 28, "Shuffle", delegate {ShuffleCards ();});
+        GameObject button = ui.CreateButton(canvas.transform, 80, -20, 100, 28, "Shuffle", delegate { ShuffleCards(); });
 
-		button.GetComponent<Image> ().color = Color.cyan;
+        button.GetComponent<Image>().color = Color.cyan;
 
-		button.GetComponentInChildren<Text> ().color = Color.gray;
+        button.GetComponentInChildren<Text>().color = Color.gray;
 
-		return button;
-	}
+        return button;
+    }
 
-	GameObject MakebackButton (){
-		GameObject canvas = GameObject.Find ("Canvas");
+    GameObject MakebackButton()
+    {
+        GameObject canvas = GameObject.Find("Canvas");
 
-		GameObject button = ui.CreateButton (canvas.transform, 80, -40, 100, 28, "Back", delegate {BacktoMainMenu();});
+        GameObject button = ui.CreateButton(canvas.transform, 80, -40, 100, 28, "Back", delegate { BacktoMainMenu(); });
 
-		button.GetComponent<Image> ().color = Color.cyan;
+        button.GetComponent<Image>().color = Color.cyan;
 
-		button.GetComponentInChildren<Text> ().color = Color.gray;
+        button.GetComponentInChildren<Text>().color = Color.gray;
 
-		return button;
-	}
+        return button;
+    }
 
-	void StartGame(){
+    void StartGame(){
 		
 		var deck = gameObject.GetComponent<MakeDeck> ().GetDeck ();
 

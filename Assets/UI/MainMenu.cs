@@ -170,8 +170,6 @@ public class MainMenu : MonoBehaviour {
 
 	void displayStar(GameObject panel, GameObject text){
 
-		this.GetComponent<ControlStart> ().PlayFarewellMusic ();
-
 		string message = "Stars\n\n"+
 			"Star 1: Instead of using cards from the book, find really dazzling ones.\n"+
 			"Star 2: Also display the current date and time.\n"+
@@ -200,9 +198,11 @@ public class MainMenu : MonoBehaviour {
 
     void Exit() {
 
-
+        this.GetComponent<ControlStart>().PlayFarewellMusic();
 
 		EditorUtility.DisplayDialog ("Farewell", "Thank you playing Eddie's Memory Game.", "Exit");
+
+        EditorUtility.DisplayDialog("Game Matchs", "The number of games played were "+ this.GetComponent<ControlStart>().GameNumber, "Exit");
 
         UnityEditor.EditorApplication.isPlaying = false;
     }

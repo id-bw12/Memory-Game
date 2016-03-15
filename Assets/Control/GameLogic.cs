@@ -44,14 +44,16 @@ public class GameLogic : MonoBehaviour {
 
 	private IEnumerator CheckMatch(){
 
-		yield return new WaitForSeconds (2.5f);
+        yield return new WaitForSeconds(2.5f);
 
-		if (secondCard.Image == firstCard.Image) {
+        if (secondCard.Image == firstCard.Image) {
 
             firstCard.FlipFaceUp();
             secondCard.FlipFaceUp();
 
-			EditorUtility.DisplayDialog ("Match", "Its a match", "Okay");
+            this.GetComponent<ControlStart>().PlaySoundEffects(true);
+
+            EditorUtility.DisplayDialog ("Match", "Its a match", "Okay");
 
 			score++;
 
@@ -61,7 +63,9 @@ public class GameLogic : MonoBehaviour {
 
 		} else {
 
-			EditorUtility.DisplayDialog ("Miss Match", "Its a miss match", "Okay");
+            this.GetComponent<ControlStart>().PlaySoundEffects(false);
+
+            EditorUtility.DisplayDialog ("Miss Match", "Its a miss match", "Okay");
 
 			secondCard.FlipFaceDown ();
 			firstCard.FlipFaceDown ();
