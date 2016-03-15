@@ -95,7 +95,7 @@ public class MainMenu : MonoBehaviour {
 
         GameObject headerText = menuMaker.CreateText(idPanel.transform, 0, 55, 160, 50, "Id Information", 14);
 
-		GameObject idText = menuMaker.CreateText(idPanel.transform, 15, 05, 160, 90,"", 08);
+		GameObject idText = menuMaker.CreateText(idPanel.transform, 35, 05, 160, 90,"", 08);
 
 		dateText = menuMaker.CreateText (idPanel.transform, 100, 50, 100, 25, System.DateTime.Now.ToString(), 8);
 
@@ -118,18 +118,20 @@ public class MainMenu : MonoBehaviour {
 	void displayId(GameObject panel, GameObject text){
 
 		string message = "Programmers\t\t\t\t: Eddie Meza\n"+
-			"Assignment #\t\t\t\t: Program 2\n"+
-			"Assignment Name\t\t: JUST CONCENTR8\n"+
-			"Course # and Title    : CISC 192 - C#\n"+
-			"Class Meeting Time  : MW 1:15 - 04:10\n"+
+			"Assignment #\t\t\t\t: Program 3.MM\n"+
+			"Assignment Name\t\t: Memory Game\n"+
+			"Course # and Title    : CISC 221 - C#\n"+
+			"Class Meeting Time  : TTH 09:35 - 12:35\n"+
 			"Instructor\t\t\t\t    : Professor Forman\n"+
 			"Hours\t\t\t\t\t\t\t: 20\n"+
 			"Difficulty\t\t\t\t        : 7\n"+
-			"Completion Date\t\t: 11/5/2016\n"+
-			"Project Name\t\t\t    : EddieProgram2";
+			"Completion Date\t\t: 03/14/2016\n"+
+			"Project Name\t\t\t    : Memory_Game";
 
 
 		text.GetComponent<Text> ().text = message;
+
+		text.GetComponent<RectTransform> ().anchoredPosition = new Vector2(35, 05);
 
 		text.GetComponent<Text> ().alignment = TextAnchor.MiddleLeft;
 	}
@@ -138,7 +140,7 @@ public class MainMenu : MonoBehaviour {
 
 		//GameObject.Destroy (text);
 
-		string message = "sdfsdfsdfsd";
+		string message = "Credits\n";
 
 		text.GetComponent<Text> ().text = message;
 
@@ -147,18 +149,38 @@ public class MainMenu : MonoBehaviour {
 
 	void displayMedia(GameObject panel, GameObject text){
 
-		string message = "njjn";
+		string message = "Pictures\n" +
+		                 "Bioshock Logo http://tinyurl.com/bioshockLogo\n" +
+		                 "Plasmids pics http://tinyurl.com/plasmids\n" +
+		                 "City wallpaper http://tinyurl.com/mk3kfg4\n" +
+		                 "Bathysphere http://tinyurl.com/l4m9ety\n" +
+		                 "Rapture gate http://tinyurl.com/m48kj4n\n" +
+		                 "Ruin party http://tinyurl.com/ktm9v3z\n\n" +
+		                 "Sound\n" +
+		                 "Weclome to Rapture http://tinyurl.com/yh2y5t5\n" +
+		                 "Circus of Values http://tinyurl.com/ykdnv8l\n" +
+		                 "El Ammo Bandito http://tinyurl.com/m72tven\n";
 
 		text.GetComponent<Text> ().text = message;
+
+		text.GetComponent<RectTransform> ().anchoredPosition = new Vector2(-30, 05);
 
 		text.GetComponent<Text> ().alignment = TextAnchor.MiddleLeft;
 	}
 
 	void displayStar(GameObject panel, GameObject text){
 
-		string message = "sdfsdfsdfsd";
+		this.GetComponent<ControlStart> ().PlayFarewellMusic ();
+
+		string message = "Stars\n\n"+
+			"Star 1: Instead of using cards from the book, find really dazzling ones.\n"+
+			"Star 2: Also display the current date and time.\n"+
+			"Star 3(2): Add a 'toggle' button for displaying/hiding all cards.\n"+
+			"Star 4(3): Generate 'everything' during run-time, not in the design mode";
 
 		text.GetComponent<Text> ().text = message;
+
+		text.GetComponent<RectTransform> ().anchoredPosition = new Vector2(-50, 05);
 
 		text.GetComponent<Text> ().alignment = TextAnchor.MiddleLeft;
 	}
@@ -178,7 +200,7 @@ public class MainMenu : MonoBehaviour {
 
     void Exit() {
 
-		this.GetComponent<ControlStart> ().PlayFarewellMusic ();
+
 
 		EditorUtility.DisplayDialog ("Farewell", "Thank you playing Eddie's Memory Game.", "Exit");
 

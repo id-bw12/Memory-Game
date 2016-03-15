@@ -1,6 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.UI;
 
+
 using System.Collections;
 
 //09:10 A.M. - 11:29 P.M.
@@ -11,6 +12,8 @@ using System.Collections;
 //07:51 P.M. - 08:51 P.M.
 //09:35 A.M. - 12:35 P.M.
 //09:35 A.M. - 12:35 P.M.
+//04:26 P.M. - 07:12 P.M.
+//11:10 P.M. - 11:56 P.M.
 
 public class ControlStart : MonoBehaviour
 {
@@ -22,10 +25,14 @@ public class ControlStart : MonoBehaviour
 	private string backgroundMusic = "BioShock Soundtrack_ 02 Welcome to Rapture",
 	farewellMusic = "Bioshock Credits [720p]", matchMusic = "", missmusic = "";
 
+	private AudioClip farewellClip;
+
     // Use this for initialization
     void Start()
     {
    
+		farewellClip = Resources.Load(farewellMusic,typeof(AudioClip))as AudioClip;
+
 		this.gameObject.AddComponent<AudioSource> ().clip = Resources.Load(backgroundMusic,typeof(AudioClip))as AudioClip;
 
 		this.gameObject.GetComponent<AudioSource> ().loop = true;
@@ -63,11 +70,12 @@ public class ControlStart : MonoBehaviour
 	
 		this.GetComponent<AudioSource> ().Stop();
 
-		this.GetComponent<AudioSource> ().clip = Resources.Load(farewellMusic,typeof(AudioClip))as AudioClip;
+		this.GetComponent<AudioSource> ().clip = farewellClip;
 
 		this.GetComponent<AudioSource> ().loop = true;
 
 		this.GetComponent<AudioSource> ().Play();
+		
 	}
 
 }

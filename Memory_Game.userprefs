@@ -1,13 +1,12 @@
 ﻿<Properties StartupItem="Assembly-CSharp.csproj">
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" PreferredExecutionTarget="Unity.Instance.Unity Editor" />
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Control\GameMode.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets\Control\ControlStart.cs">
     <Files>
-      <File FileName="Assets\Control\GameLogic.cs" Line="88" Column="20" />
-      <File FileName="Assets\Control\GameMode.cs" Line="24" Column="21" />
       <File FileName="Assets\Control\MakeDeck.cs" Line="83" Column="2" />
       <File FileName="Assets\CardScripts\MemoryCard.cs" Line="91" Column="13" />
-      <File FileName="Assets\Control\ControlStart.cs" Line="23" Column="62" />
-      <File FileName="Assets\UI\MainMenu.cs" Line="181" Column="59" />
+      <File FileName="Assets\Control\ControlStart.cs" Line="16" Column="26" />
+      <File FileName="Assets\UI\MainMenu.cs" Line="183" Column="77" />
+      <File FileName="Assets\UI\UIMaker.cs" Line="1" Column="1" />
     </Files>
   </MonoDevelop.Ide.Workbench>
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
