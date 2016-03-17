@@ -33,6 +33,12 @@ public class MainMenu : MonoBehaviour {
 		dateText.GetComponent<Text> ().text = System.DateTime.Now.ToString ();
 	}
 
+	/**********************************************************
+	 * 	NAME: 			MakeMainMenu
+	 *  DESCRIPTION:	Makes the Main Menu screen with five 
+	 * 					buttons to navigate te menu screen.
+	 * 
+	 * ********************************************************/
     void MakeMainMenu() {
 
 		GameObject mainMenupanel = menuMaker.CreatePanel(canvas.transform, background);
@@ -48,6 +54,14 @@ public class MainMenu : MonoBehaviour {
         buttons.Add(menuMaker.CreateButton(mainMenupanel.transform, 0, -50, 125, 25, "Exit", delegate { Exit(); }));
     }
 
+	/**********************************************************
+	 * 	NAME: 			PlayGame
+	 *  DESCRIPTION:	Calls the DestoryPanel method, destorys
+	 * 					the dataText gameobject, and MainMenu 
+	 * 					script. Slao add the GameMode, GameLogic,
+	 * 					and MakeDeck scripts.
+	 * 
+	 * ********************************************************/
     void PlayGame(GameObject panel)
     {
         DestoryPanel(panel);
@@ -64,6 +78,12 @@ public class MainMenu : MonoBehaviour {
 
     }
 
+	/**********************************************************
+	 * 	NAME: 			GameInstruct
+	 *  DESCRIPTION:	Calls the DestoryPanel method and setups
+	 * 					and shows the Game Instructions page.
+	 * 
+	 * ********************************************************/
 	void GameInstruct(GameObject panel){
 
 		DestoryPanel (panel);
@@ -78,7 +98,7 @@ public class MainMenu : MonoBehaviour {
 
 		GameObject instructPanel = menuMaker.CreatePanel(canvas.transform, background);
 
-		GameObject instructText = menuMaker.CreateText (instructPanel.transform, -50,00,100,100, message,8);
+		GameObject instructText = menuMaker.CreateText (instructPanel.transform, -70,00,100,100, message,8);
 
 		instructText.GetComponent<Text> ().alignment = TextAnchor.MiddleLeft;
 
@@ -87,6 +107,12 @@ public class MainMenu : MonoBehaviour {
 		buttons.Add(menuMaker.CreateButton(instructPanel.transform, 0, -50, 125, 25, "back", delegate { Back(instructPanel); }));
 	}
 
+	/**********************************************************
+	 * 	NAME: 			IdInfo
+	 *  DESCRIPTION:	Calls the DestoryPanel method and setup
+	 * 					the IdInfo page
+	 * 
+	 * ********************************************************/
     void IdInfo(GameObject panel) {
 
         DestroyObject(panel);
@@ -95,27 +121,33 @@ public class MainMenu : MonoBehaviour {
 
         GameObject headerText = menuMaker.CreateText(idPanel.transform, 0, 55, 160, 50, "Id Information", 14);
 
-		GameObject idText = menuMaker.CreateText(idPanel.transform, 35, 05, 160, 90,"", 08);
+		GameObject idText = menuMaker.CreateText(idPanel.transform, 35, 05, 160, 150,"", 08);
 
 		dateText = menuMaker.CreateText (idPanel.transform, 100, 50, 100, 25, System.DateTime.Now.ToString(), 8);
 
 		GameObject idBttn = menuMaker.CreateButton(idPanel.transform, -120, -50, 100, 25, "Id Info", 
-			delegate { displayId(idPanel,idText); });
+			delegate { DisplayId(idPanel,idText); });
 
 		GameObject crdeitsBttn = menuMaker.CreateButton(idPanel.transform, -60, -50, 100, 25, "Credits", 
-			delegate { displayCredits(idPanel,idText); });
+			delegate { DisplayCredits(idPanel,idText); });
 
 		GameObject mediaBttn = menuMaker.CreateButton(idPanel.transform, 0, -50, 100, 25, "Media",
-			delegate { displayMedia(idPanel,idText); });
+			delegate { DisplayMedia(idPanel,idText); });
 		
 		GameObject starBttn = menuMaker.CreateButton(idPanel.transform, 60, -50, 100, 25, "Stars",
-			delegate { displayStar(idPanel,idText); });
+			delegate { DisplayStar(idPanel,idText); });
 		
 		GameObject backBttn = menuMaker.CreateButton(idPanel.transform, 120, -50, 100, 25, "back", 
 			delegate { Back(idPanel); });
     }
 
-	void displayId(GameObject panel, GameObject text){
+	/**********************************************************
+	 * 	NAME: 			DisplayId
+	 *  DESCRIPTION:	Displays the Id Information text.
+	 * 
+	 * 
+	 * ********************************************************/
+	void DisplayId(GameObject panel, GameObject text){
 
 		string message = "Programmers\t\t\t\t: Eddie Meza\n"+
 			"Assignment #\t\t\t\t: Program 3.MM\n"+
@@ -123,8 +155,8 @@ public class MainMenu : MonoBehaviour {
 			"Course # and Title    : CISC 221 - C#\n"+
 			"Class Meeting Time  : TTH 09:35 - 12:35\n"+
 			"Instructor\t\t\t\t    : Professor Forman\n"+
-			"Hours\t\t\t\t\t\t\t: 20\n"+
-			"Difficulty\t\t\t\t        : 7\n"+
+			"Hours\t\t\t\t\t\t\t: 15\n"+
+			"Difficulty\t\t\t\t        : 6\n"+
 			"Completion Date\t\t: 03/14/2016\n"+
 			"Project Name\t\t\t    : Memory_Game";
 
@@ -136,7 +168,13 @@ public class MainMenu : MonoBehaviour {
 		text.GetComponent<Text> ().alignment = TextAnchor.MiddleLeft;
 	}
 
-	void displayCredits(GameObject panel, GameObject text){
+	/**********************************************************
+	 * 	NAME: 			DisplayCredits
+	 *  DESCRIPTION:	Displays the credits text
+	 * 
+	 * 
+	 * ********************************************************/
+	void DisplayCredits(GameObject panel, GameObject text){
 
 		//GameObject.Destroy (text);
 
@@ -147,7 +185,13 @@ public class MainMenu : MonoBehaviour {
 		text.GetComponent<Text> ().alignment = TextAnchor.MiddleLeft;
 	}
 
-	void displayMedia(GameObject panel, GameObject text){
+	/**********************************************************
+	 * 	NAME: 			DisplayMedia
+	 *  DESCRIPTION:	Display the sounds and pictures names
+	 * 					and links on where to get them
+	 * 
+	 * ********************************************************/
+	void DisplayMedia(GameObject panel, GameObject text){
 
 		string message = "Pictures\n" +
 		                 "Bioshock Logo http://tinyurl.com/bioshockLogo\n" +
@@ -165,10 +209,18 @@ public class MainMenu : MonoBehaviour {
 
 		text.GetComponent<RectTransform> ().anchoredPosition = new Vector2(-30, 05);
 
+		text.GetComponent<Text> ().fontSize = 06;
+
 		text.GetComponent<Text> ().alignment = TextAnchor.MiddleLeft;
 	}
 
-	void displayStar(GameObject panel, GameObject text){
+	/**********************************************************
+	 * 	NAME: 			DisplayStar
+	 *  DESCRIPTION:	Display the amount of stars done in this
+	 * 					Project.
+	 * 
+	 * ********************************************************/
+	void DisplayStar(GameObject panel, GameObject text){
 
 		string message = "Stars\n\n"+
 			"Star 1: Instead of using cards from the book, find really dazzling ones.\n"+
@@ -181,8 +233,17 @@ public class MainMenu : MonoBehaviour {
 
 		text.GetComponent<RectTransform> ().anchoredPosition = new Vector2(-50, 05);
 
+		text.GetComponent<Text> ().fontSize = 06;
+
 		text.GetComponent<Text> ().alignment = TextAnchor.MiddleLeft;
 	}
+
+	/**********************************************************
+	 * 	NAME: 			Options
+	 *  DESCRIPTION:	Calls the DestoryPanel method and setup
+	 * 					the Options panel.
+	 * 
+	 * ********************************************************/
 
     void Options(GameObject panel)
     {
@@ -197,9 +258,17 @@ public class MainMenu : MonoBehaviour {
         buttons.Add(menuMaker.CreateButton(optionsPanel.transform, 0, -30, 125, 25, "back", delegate { Back(optionsPanel); }));
     }
 
+	/**********************************************************
+	 * 	NAME: 			Exit
+	 *  DESCRIPTION:	Calls the RarewellMusic method in the 
+	 * 					ControlStart script. Also a popup box 
+	 * 					comes up to say farwell to the user and
+	 * 					tell them how many game they have played.
+	 * 
+	 * ********************************************************/
     void Exit() {
 
-        this.GetComponent<ControlStart>().PlayFarewellMusic();
+		this.GetComponent<ControlStart> ().FarewellMusic ();
 
 		EditorUtility.DisplayDialog ("Farewell", "Thank you playing Eddie's Memory Game.", "Exit");
 
@@ -208,6 +277,13 @@ public class MainMenu : MonoBehaviour {
         UnityEditor.EditorApplication.isPlaying = false;
     }
 
+	/**********************************************************
+	 * 	NAME: 			Back
+	 *  DESCRIPTION:	Calls the Destory the DestoryPanel method
+	 * 					and then calls the MakeMainMenu method
+	 * 
+	 * 
+	 * ********************************************************/
     void Back(GameObject panel) {
 
         DestoryPanel(panel);
@@ -215,7 +291,12 @@ public class MainMenu : MonoBehaviour {
         MakeMainMenu();
     }
 
-
+	/**********************************************************
+	 * 	NAME: 			DestoryPanel
+	 *  DESCRIPTION:	Destorys the current panel and clears 
+	 * 					the buttons list.
+	 * 
+	 * ********************************************************/
      void DestoryPanel(GameObject panel) { 
 
         GameObject.Destroy(panel);

@@ -11,7 +11,7 @@ public class MemoryCard : MonoBehaviour {
 
 	private Sprite faceCard, backCard;
 
-	private bool isSelected = false, isMatched = false;
+	private bool isSelected = false;
 
 	// Use this for initialization
 	void Start () {
@@ -26,7 +26,7 @@ public class MemoryCard : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (gameTimer.Enable && isSelected && !isMatched) {
+		if (gameTimer.Enable && isSelected) {
 			this.transform.Rotate (0.0f, -2.75f, 0.0f);
 
 			CardFlips ();
@@ -37,9 +37,18 @@ public class MemoryCard : MonoBehaviour {
 		
 	}
 
+	/**********************************************************
+	 * 	NAME: 			OnMouseDown
+	 *  DESCRIPTION:	Checks to see if the current card
+	 * 					is selected in a already and if isn't
+	 * 					already paired off. if both are false
+	 * 					then passes it to the game logic and 
+	 * 					activate to the timer.
+	 * 
+	 * ********************************************************/
 	void OnMouseDown(){
 		
-		if(!isSelected && !logic.IsMatch() && !isMatched){
+		if(!isSelected && !logic.IsMatch()){
 
 			isSelected = true;
 
@@ -51,6 +60,13 @@ public class MemoryCard : MonoBehaviour {
 	    }
 	}
 
+	/**********************************************************
+	 * 	NAME: 			CardFlips
+	 *  DESCRIPTION:	Gets the cards y rotation coordinate   
+	 * 					and changes the card image base on the 
+	 * 					y coordinate.
+	 * 
+	 * ********************************************************/
     private void CardFlips() {
 
 		int y = (int)transform.rotation.eulerAngles.y;
@@ -64,11 +80,24 @@ public class MemoryCard : MonoBehaviour {
 
     }
 
+	/**********************************************************
+	 * 	NAME: 			Image
+	 *  DESCRIPTION:	The Image sprite property that get and 
+	 * 					returns a sprite image. 
+	 * 
+	 * ********************************************************/
    public Sprite Image{
 		get{ return this.faceCard;}
 		set{ this.faceCard = value;}
 	}
 
+	/**********************************************************
+	 * 	NAME: 			FlipFaceDown
+	 *  DESCRIPTION:	sets the isSelect value to true and 
+	 * 					the timer time limit. Also enables the
+	 * 					the timer.
+	 * 
+	 * ********************************************************/
 	public void FlipFaceDown(){
 
 		isSelected = true;
@@ -78,14 +107,27 @@ public class MemoryCard : MonoBehaviour {
 		gameTimer.Enable = true;
 	}
 
+	/**********************************************************
+	 * 	NAME: 			FlipFaceUp
+	 *  DESCRIPTION:	Flips the cards image to the faceCard 
+	 * 					image and set the disable the box collision
+	 * 
+	 * ********************************************************/
 	public void FlipFaceUp(){
 
 		this.gameObject.GetComponent<SpriteRenderer>().sprite = faceCard;
 
-		isMatched = true;
+		this.gameObject.GetComponent<BoxCollider2D> ().enabled = false;
 
 	}
 
+	/**********************************************************
+	 * 	NAME: 			ToggleCards
+	 *  DESCRIPTION:	Gets the isFlip bollean variable and 
+	 * 					changes the card picture face up or down
+	 * 					base on the the variable value
+	 * 
+	 * ********************************************************/
 	public void ToggleCards(bool isFlip){
 	
 		if(isFlip)

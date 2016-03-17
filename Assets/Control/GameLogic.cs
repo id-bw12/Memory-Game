@@ -27,6 +27,14 @@ public class GameLogic : MonoBehaviour {
 	
 	}
 
+	/**********************************************************
+	 * 	NAME: 			CheckRevealedCards
+	 *  DESCRIPTION:	Gets the selected memory card and sees
+	 * 					if one is already selected. If one is it
+	 * 					is saved and the CheckMatch method is 
+	 * 					called. If not then its just saved.
+	 * 
+	 * ********************************************************/
 	public void CheckRevealedCards(MemoryCard card){
 
 		if (firstCard != null) {
@@ -42,6 +50,15 @@ public class GameLogic : MonoBehaviour {
 		}
 	}
 
+	/**********************************************************
+	 * 	NAME: 			CheckMatch
+	 *  DESCRIPTION:	Checks to see if the two selected cards
+	 * 					match. ifThey match then play a sound
+	 * 					effect and a pop up box that say they
+	 * 					match. If not then play a sound effect
+	 * 					and a pop up box saying they don't match
+	 * 
+	 * ********************************************************/
 	private IEnumerator CheckMatch(){
 
         yield return new WaitForSeconds(2.5f);
@@ -58,8 +75,6 @@ public class GameLogic : MonoBehaviour {
 			this.GetComponent<ControlStart>().Matchs += 1;
 
 			scoreLabel.text = "Matchs: " + this.GetComponent<ControlStart>().Matchs;
-
-
 
 		} else {
 
@@ -87,6 +102,14 @@ public class GameLogic : MonoBehaviour {
 
 	}
 
+	/**********************************************************
+	 * 	NAME: 			CheckWinConditions
+	 *  DESCRIPTION:	Checks to see if the game is over. If
+	 * 					it is then enable the buttons and make 
+	 * 					a pop up box that tells the player that
+	 * 					the game is over and how to play again
+	 * 
+	 * ********************************************************/
 	private void CheckWinConditions(){
 
 		if (score == 8) {
@@ -99,21 +122,45 @@ public class GameLogic : MonoBehaviour {
 		}
 	}
 
+	/**********************************************************
+	 * 	NAME: 			Restart
+	 *  DESCRIPTION:	Restarts the whole scene
+	 * 
+	 * 
+	 * ********************************************************/
 	public void Restart(){
 
 		SceneManager.LoadScene ("Menu_Scene");
 
 	}
 
+	/**********************************************************
+	 * 	NAME: 			IsMatch
+	 *  DESCRIPTION:	returns the checkingMatch boolean
+	 * 
+	 * 
+	 * ********************************************************/
 	public bool IsMatch(){
 		return checkingMatch;
 	}
 		
+	/**********************************************************
+	 * 	NAME: 			Score
+	 *  DESCRIPTION:	Gets and set the score number
+	 * 
+	 * 
+	 * ********************************************************/
 	public int Score{
 		get { return score;}
 		set{ score = value;}
 	}
 
+	/**********************************************************
+	 * 	NAME: 			Misses
+	 *  DESCRIPTION:	Gets and set the miss number
+	 * 
+	 * 
+	 * ********************************************************/
 	public int Misses{
 	
 		get { return missMatch;}

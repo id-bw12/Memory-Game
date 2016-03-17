@@ -44,6 +44,12 @@ public class MakeDeck : MonoBehaviour {
 	
 	}
 
+	/**********************************************************
+	 * 	NAME: 			LoadCardImages
+	 *  DESCRIPTION:	Loads the card images in an array
+	 * 
+	 * 
+	 * ********************************************************/
 	void LoadCardImages(){
 
 		cardImages [0] = Resources.Load ("fire", typeof(Sprite)) as Sprite;
@@ -56,6 +62,12 @@ public class MakeDeck : MonoBehaviour {
 		cardImages [7] = Resources.Load ("telekinesis", typeof(Sprite)) as Sprite;
 	}
 
+	/**********************************************************
+	 * 	NAME: 			MakeMemoryCard
+	 *  DESCRIPTION:	Gets the card image and the card position
+	 * 					and uses it to make the memory card.
+	 * 
+	 * ********************************************************/
 	void MakeMemoryCard(Sprite cardImage , Vector3 position){
 
 		GameObject memoryCard = new GameObject ("Card");
@@ -80,6 +92,11 @@ public class MakeDeck : MonoBehaviour {
 
 	}
 
+	/**********************************************************
+	 * 	NAME: 			ShuffleImage
+	 *  DESCRIPTION:	Shuffles the images in the memory cards
+	 * 
+	 * ********************************************************/
 	public void ShuffleImages(){
 
 		Sprite tempSprite;
@@ -99,6 +116,12 @@ public class MakeDeck : MonoBehaviour {
 		}
 	}
 
+	/**********************************************************
+	 * 	NAME: 			GetDeck
+	 *  DESCRIPTION:	Returns the deck
+	 * 
+	 * 
+	 * ********************************************************/
 	public List<GameObject> GetDeck() {
 		return deck;
 

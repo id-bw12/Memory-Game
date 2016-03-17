@@ -56,6 +56,12 @@ public class ControlStart : MonoBehaviour
 		
     }
 
+	/**********************************************************
+	 * 	NAME: 			Gamenumber
+	 *  DESCRIPTION:	The gameCount integer property
+	 * 
+	 * 
+	 * ********************************************************/
     public int GameNumber {
 
         set { this.gameCount = value; }
@@ -64,12 +70,24 @@ public class ControlStart : MonoBehaviour
         
     }
 
+	/**********************************************************
+	 * 	NAME: 			Matchs
+	 *  DESCRIPTION:	The match integer property
+	 * 
+	 * 
+	 * ********************************************************/
     public int Matchs {
 
         set { this.matchs = value; }
         get { return this.matchs; }
     }
 
+	/**********************************************************
+	 * 	NAME: 			MissMatchs
+	 *  DESCRIPTION:	The miss matchs integer property
+	 * 
+	 * 
+	 * ********************************************************/
     public int MissMatchs
     {
 
@@ -78,6 +96,12 @@ public class ControlStart : MonoBehaviour
     }
 
 
+	/**********************************************************
+	 * 	NAME: 			Flipped
+	 *  DESCRIPTION:	The isFlip boolean property 
+	 * 
+	 * 
+	 * ********************************************************/
     public bool Fliped{
 
 		set{ this.isFlip = value; }
@@ -86,9 +110,13 @@ public class ControlStart : MonoBehaviour
 
 	}
 
-
-
-	public void PlayFarewellMusic(){
+	/**********************************************************
+	 * 	NAME: 			FarewellMusic
+	 *  DESCRIPTION:	Stops the current music and switchs it 
+	 * 					with the farewell music.
+	 * 
+	 * ********************************************************/
+	public void FarewellMusic(){
 	
 		this.GetComponent<AudioSource> ().Stop();
 
@@ -101,7 +129,12 @@ public class ControlStart : MonoBehaviour
         this.GetComponent<AudioSource>().Play(44100);
     }
 
-
+	/**********************************************************
+	 * 	NAME: 			PlaySoundEffects
+	 *  DESCRIPTION:	Gets the match boolean variable and 
+	 * 					choose which audioclip to play.
+	 * 
+	 * ********************************************************/
     public void PlaySoundEffects(bool match) {
 
         if (match)

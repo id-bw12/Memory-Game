@@ -47,6 +47,12 @@ public class GameMode : MonoBehaviour {
         dateTime.GetComponent<TextMesh>().text = System.DateTime.Now.ToString();
     }
 
+	/**********************************************************
+	 * 	NAME: 			SetupBackground
+	 *  DESCRIPTION:	Makes a GameObject that holds the 
+	 * 					background image.
+	 * 
+	 * ********************************************************/
     void SetupBackgorund()
     {
 
@@ -64,6 +70,12 @@ public class GameMode : MonoBehaviour {
 
     }
 
+	/**********************************************************
+	 * 	NAME: 			MakeGamenumber
+	 *  DESCRIPTION:	Makes a GameObject that holds and shows 
+	 * 					the shows the current game number
+	 * 
+	 * ********************************************************/
     void MakeGameNumber()
     {
 
@@ -82,6 +94,13 @@ public class GameMode : MonoBehaviour {
         text.GetComponent<TextMesh>().fontSize = 80;
     }
 
+	/**********************************************************
+	 * 	NAME: 			MakeScoreText
+	 *  DESCRIPTION:	Makes a GameObject that holds and shows
+	 * 					the shows the current Scroe
+	 * 
+	 * 
+	 * ********************************************************/
     void MakeScoreText()
     {
 
@@ -101,6 +120,13 @@ public class GameMode : MonoBehaviour {
 
     }
 
+	/**********************************************************
+	 * 	NAME: 			MakemissText
+	 *  DESCRIPTION:	Makes a GameObject that holds and shows  
+	 * 					the shows the current miss plays
+	 * 
+	 * 
+	 * ********************************************************/
     void MakeMissText()
     {
 
@@ -119,6 +145,13 @@ public class GameMode : MonoBehaviour {
         text.GetComponent<TextMesh>().fontSize = 80;
     }
 
+	/**********************************************************
+	 * 	NAME: 			MakeDateTime
+	 *  DESCRIPTION:	Makes a GameObject that holds and shows 
+	 * 					the shows the current date and time
+	 * 
+	 * 
+	 * ********************************************************/
     void MakeDateTime()
     {
 
@@ -134,6 +167,13 @@ public class GameMode : MonoBehaviour {
 
     }
 
+	/**********************************************************
+	 * 	NAME: 			MakePlayButton
+	 *  DESCRIPTION:	Makes a button a child of the canvas object
+	 * 					and returns it
+	 * 
+	 * 
+	 * ********************************************************/
     GameObject MakePlayButton()
     {
         GameObject canvas = GameObject.Find("Canvas");
@@ -147,6 +187,13 @@ public class GameMode : MonoBehaviour {
         return button;
     }
 
+	/**********************************************************
+	 * 	NAME: 			MakeDateTime
+	 *  DESCRIPTION:	Makes a button the child of the canvas 
+	 * 					and returns it.
+	 * 
+	 * 
+	 * ********************************************************/
     GameObject MakeToggleButton()
     {
         GameObject canvas = GameObject.Find("Canvas");
@@ -161,6 +208,13 @@ public class GameMode : MonoBehaviour {
 
     }
 
+	/**********************************************************
+	 * 	NAME: 			MakeShuffleButton
+	 *  DESCRIPTION:	Makes a button the child of the canvas 
+	 * 					and returns it.
+	 * 
+	 * 
+	 * ********************************************************/
     GameObject MakeShuffleButton()
     {
         GameObject canvas = GameObject.Find("Canvas");
@@ -174,6 +228,13 @@ public class GameMode : MonoBehaviour {
         return button;
     }
 
+	/**********************************************************
+	 * 	NAME: 			MakebackButton
+	 *  DESCRIPTION:	Makes a button the child of the canvas 
+	 * 					and returns it.
+	 * 
+	 * 
+	 * ********************************************************/
     GameObject MakebackButton()
     {
         GameObject canvas = GameObject.Find("Canvas");
@@ -187,6 +248,14 @@ public class GameMode : MonoBehaviour {
         return button;
     }
 
+	/**********************************************************
+	 * 	NAME: 			StartGame
+	 *  DESCRIPTION:	If the cards are face up then flips them
+	 * 					face down and disables the display and 
+	 * 					shuffle buttons. Enables the cards collision
+	 * 					and update the game number, matchs, and misses
+	 * 
+	 * ********************************************************/
     void StartGame(){
 		
 		var deck = gameObject.GetComponent<MakeDeck> ().GetDeck ();
@@ -199,12 +268,21 @@ public class GameMode : MonoBehaviour {
 		if (isFlip) {
 			isFlip = false;
 			this.GetComponent<ControlStart> ().Fliped = isFlip;
+			for (int i = 0; i < deck.Count; i++) {
+				deck [i].GetComponent<BoxCollider2D> ().enabled = true;
+				deck [i].GetComponent<MemoryCard> ().ToggleCards (isFlip);
+			}
+		} else if(this.GetComponent<ControlStart> ().GameNumber != 0){
+			
+			for (int i = 0; i < deck.Count; i++) {
+				deck [i].GetComponent<BoxCollider2D> ().enabled = true;
+				deck [i].GetComponent<MemoryCard> ().FlipFaceDown ();
+			}
 		}
+		else
+			for (int i = 0; i < deck.Count; i++) 
+				deck [i].GetComponent<BoxCollider2D> ().enabled = true;
 
-		for (int i = 0; i < deck.Count; i++) {
-			deck [i].GetComponent<BoxCollider2D> ().enabled = true;
-			deck [i].GetComponent<MemoryCard> ().ToggleCards (isFlip);
-		}
 
 		this.GetComponent<ControlStart> ().GameNumber += 1;
 
@@ -219,6 +297,13 @@ public class GameMode : MonoBehaviour {
         GameObject.Find("Miss Label").GetComponent<TextMesh>().text = "Miss: 0";
     }
 
+	/**********************************************************
+	 * 	NAME: 			ShowCards 
+	 *  DESCRIPTION:	Flips the cards face up or face down
+	 * 					base on the isFlip variable
+	 * 
+	 * 
+	 * ********************************************************/
 	void ShowCards(){
 
 		var deck = gameObject.GetComponent<MakeDeck> ().GetDeck ();
@@ -242,6 +327,13 @@ public class GameMode : MonoBehaviour {
 		
 	}
 
+	/**********************************************************
+	 * 	NAME: 			ShuffleCards
+	 *  DESCRIPTION:	Gets the deck and shuffles the deck and
+	 * 					if the cards are flip then show the new 
+	 * 					card positions
+	 * 
+	 * ********************************************************/
 	void ShuffleCards ()
 	{
 		gameObject.GetComponent<MakeDeck> ().ShuffleImages ();
@@ -256,6 +348,13 @@ public class GameMode : MonoBehaviour {
 	
 	}
 
+	/**********************************************************
+	 * 	NAME: 			BacktomainMenu
+	 *  DESCRIPTION:	Calls the ClearScreen method and removes
+	 * 					the MakeDeck, GameLogic, and GameMode 
+	 * 					scripts. Also adds the MainMenu script
+	 * 
+	 * ********************************************************/
 	void BacktoMainMenu(){
 
 		ClearScreen ();
@@ -269,6 +368,13 @@ public class GameMode : MonoBehaviour {
 		Destroy (this.GetComponent<GameMode>());
 	}
 
+	/**********************************************************
+	 * 	NAME: 			ClearScreen
+	 *  DESCRIPTION:	Destorys all objects on the screen
+	 * 					and clears the deck and button lists
+	 * 
+	 * 
+	 * ********************************************************/
 	void ClearScreen(){
 	
 		List<GameObject> deck = this.GetComponent<MakeDeck> ().GetDeck ();
@@ -291,6 +397,12 @@ public class GameMode : MonoBehaviour {
 		buttons.Clear ();
 	}
 
+	/**********************************************************
+	 * 	NAME: 			ToggleButtons
+	 *  DESCRIPTION:	Enables the display and shuffle buttons
+	 * 
+	 * 
+	 * ********************************************************/
 	public void ToggleButtons(){
 
 		buttons [1].gameObject.GetComponent<Button> ().enabled = true;

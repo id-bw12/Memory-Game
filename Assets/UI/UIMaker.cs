@@ -25,6 +25,14 @@ public class UIMakerScript : MonoBehaviour
 
     }
 
+	/**********************************************************
+	 * 	NAME: 			CreateCanvas
+	 *  DESCRIPTION:	Get the control object transform and 
+	 * 					uses it to create to the canvas and 
+	 * 					return it.
+	 * 
+	 * ********************************************************/
+
     public GameObject CreateCanvas(Transform parent)
     {
         // create the canvas
@@ -48,6 +56,12 @@ public class UIMakerScript : MonoBehaviour
         return canvasObject;
     }
 
+	/**********************************************************
+	 * 	NAME: 			CreateEventSystem
+	 *  DESCRIPTION:	Gets the transform of the canvas and 
+	 * 					makes the event system and returns it
+	 * 
+	 * ********************************************************/
     public GameObject CreateEventSystem(Transform parent)
     {
         GameObject esObject = new GameObject("EventSystem");
@@ -65,6 +79,12 @@ public class UIMakerScript : MonoBehaviour
         return esObject;
     }
 
+	/**********************************************************
+	 * 	NAME: 			CreatePanel
+	 *  DESCRIPTION:	Gets the canvas transform and uses it
+	 * 					to make the panel and returns it
+	 * 
+	 * ********************************************************/
 	public GameObject CreatePanel(Transform parent, Sprite background)
     {
         GameObject panelObject = new GameObject("Panel");
@@ -89,6 +109,13 @@ public class UIMakerScript : MonoBehaviour
         return panelObject;
     }
 
+	/**********************************************************
+	 * 	NAME: 			CreateText
+	 *  DESCRIPTION:	Gets the panels transform, x, y, height,
+	 * 					width, string, and fontsize variables.
+	 * 					Uses it to make the text and returns it.
+	 * 
+	 * ********************************************************/
     public GameObject CreateText(Transform parent, float x, float y,
                                       float w, float h, string message, int fontSize)
     {
@@ -118,6 +145,15 @@ public class UIMakerScript : MonoBehaviour
         return textObject;
     }
 
+	/**********************************************************
+	 * 	NAME: 			CreatButton
+	 *  DESCRIPTION:	Gets the panels transform, x, y, height,
+	 * 					width, string, and eventlistner variables.
+	 * 					Uses it to make a button and sends the
+	 * 					string and the buttons transform to the
+	 * 					text for the buttton.
+	 * 
+	 * ********************************************************/
     public GameObject CreateButton(Transform parent, float x, float y, float w, float h, string message,
                                         UnityAction eventListner)
     {
@@ -148,6 +184,13 @@ public class UIMakerScript : MonoBehaviour
         return buttonObject;
     }
 
+	/**********************************************************
+	 * 	NAME: 			SetSize
+	 *  DESCRIPTION:	Gets the buttons tansform and its width
+	 * 					and height and uses it to set the button
+	 * 					offset position.
+	 * 
+	 * ********************************************************/
     private static void SetSize(RectTransform trans, Vector2 size)
     {
         Vector2 currSize = trans.rect.size;

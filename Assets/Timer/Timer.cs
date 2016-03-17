@@ -12,7 +12,13 @@ public class Timer : MonoBehaviour {
         time = new System.Timers.Timer();
 		time.Elapsed += Time_Elapsed;
 	}
-
+		
+	/**********************************************************
+	 * 	NAME: 			Time_Elapsed
+	 *  DESCRIPTION:	Disables the timer when the time limit
+	 * 					is hit.
+	 * 
+	 * ********************************************************/
 	void Time_Elapsed (object sender, ElapsedEventArgs e)
 	{
 
@@ -27,11 +33,22 @@ public class Timer : MonoBehaviour {
 	
 	}
 		
-
+	/**********************************************************
+	 * 	NAME: 			SetTimeLimit
+	 *  DESCRIPTION:	The isFlip boolean property 
+	 * 
+	 * 
+	 * ********************************************************/
     public void SetTimeLimit() {
 		time.Interval = 1100;
     }
 
+	/**********************************************************
+	 * 	NAME: 			Flipped
+	 *  DESCRIPTION:	The isFlip boolean property 
+	 * 
+	 * 
+	 * ********************************************************/
     public bool Enable {
         get { return time.Enabled; }
         set { time.Enabled = value; }

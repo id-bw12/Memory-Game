@@ -15,6 +15,12 @@ public class SetupControl : MonoBehaviour {
 	
 	}
 
+	/**********************************************************
+	 * 	NAME: 			MakeControlObject
+	 *  DESCRIPTION:	Makes the control object and give it
+	 * 					the MainMenu and ControlStart script
+	 * 
+	 * ********************************************************/
 	void MakeControlObject(){
 
 		GameObject control = new GameObject ("Control Object");
