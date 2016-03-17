@@ -9,8 +9,6 @@ public class GameLogic : MonoBehaviour {
 
 	[SerializeField] private TextMesh scoreLabel, missLabel;
 
-    private int score = 0;
-
 	private bool checkingMatch = false;
 
 	private MemoryCard firstCard, secondCard;
@@ -88,9 +86,9 @@ public class GameLogic : MonoBehaviour {
 			secondCard.FlipFaceDown ();
 			firstCard.FlipFaceDown ();
 
-            this.GetComponent<ControlStart>().MissMatchs += 1;
+            ++control.MissMatchs;
 
-            missLabel.text = "Miss: " + this.GetComponent<ControlStart>().MissMatchs;
+            missLabel.text = "Miss: " + control.MissMatchs;
 
 			yield return new WaitForSeconds (1.5f);
 
@@ -116,7 +114,7 @@ public class GameLogic : MonoBehaviour {
         int cardsPairslimit = 8;
 
 		if (control.Matchs == cardsPairslimit) {
-			this.GetComponent<ControlStart> ().Fliped = true;
+			control.isFlip = true;
 
 			this.GetComponent<GameMode> ().ToggleButtons ();
 
@@ -145,16 +143,5 @@ public class GameLogic : MonoBehaviour {
 	 * ********************************************************/
 	public bool IsMatch(){
 		return checkingMatch;
-	}
-		
-	/**********************************************************
-	 * 	NAME: 			Score
-	 *  DESCRIPTION:	Gets and set the score number
-	 * 
-	 * 
-	 * ********************************************************/
-	public int Score{
-		get { return score;}
-		set{ score = value;}
 	}
 }

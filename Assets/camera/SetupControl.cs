@@ -29,7 +29,5 @@ public class SetupControl : MonoBehaviour {
 
         control.AddComponent<ControlStart> ();
 
-        
-
 	}
 }

@@ -11,6 +11,8 @@ public class GameMode : MonoBehaviour {
 
 	private UIMakerScript ui;
 
+    private ControlStart control;
+
     private GameObject dateTime;
 
     private List<GameObject> buttons = new List<GameObject> ();
@@ -19,6 +21,8 @@ public class GameMode : MonoBehaviour {
 	void Start () {
 
 		ui = new UIMakerScript ();
+
+        control = GameObject.Find("Control Object").GetComponent<ControlStart>();
 
         dateTime = new GameObject("Date Label");
 
@@ -259,18 +263,16 @@ public class GameMode : MonoBehaviour {
     void StartGame(){
 		
 		var deck = gameObject.GetComponent<MakeDeck> ().GetDeck ();
-
-		bool isFlip = this.gameObject.GetComponent<ControlStart> ().Fliped;
+        
 
         for (int i = 0; i < 3; i++) 
 		    buttons [i].GetComponent<Button> ().enabled = false;
 
-		if (isFlip) {
-			isFlip = false;
-			this.GetComponent<ControlStart> ().Fliped = isFlip;
+		if (control.isFlip) {
+            control.isFlip = false;
 			for (int i = 0; i < deck.Count; i++) {
 				deck [i].GetComponent<BoxCollider2D> ().enabled = true;
-				deck [i].GetComponent<MemoryCard> ().ToggleCards (isFlip);
+				deck [i].GetComponent<MemoryCard> ().ToggleCards (control.isFlip);
 			}
 		} else if(this.GetComponent<ControlStart> ().GameNumber != 0){
 			
@@ -284,11 +286,11 @@ public class GameMode : MonoBehaviour {
 				deck [i].GetComponent<BoxCollider2D> ().enabled = true;
 
 
-		this.GetComponent<ControlStart> ().GameNumber += 1;
+        control.GameNumber += 1;
 
-        this.GetComponent<ControlStart>().Matchs = 0;
+        control.Matchs = 0;
 
-        this.GetComponent<ControlStart>().MissMatchs = 0;
+        control.MissMatchs = 0;
 
         GameObject.Find ("Game Label").GetComponent<TextMesh> ().text = "Game: " + this.GetComponent<ControlStart> ().GameNumber;
 
@@ -310,20 +312,17 @@ public class GameMode : MonoBehaviour {
 
 		var bttnText = buttons [1].GetComponentInChildren<Text> ();
 
-		var isFlip = this.gameObject.GetComponent<ControlStart> ().Fliped;
-
-		if (isFlip) {
-			isFlip = false;
+		if (control.isFlip) {
+            control.isFlip = false;
 			bttnText.text = "Display";
 		} else{
-			isFlip = true;
+            control.isFlip = true;
 			bttnText.text = "Hide";
 		}
 
-		this.GetComponent<ControlStart> ().Fliped = isFlip;
 
-		for (int i = 0; i < deck.Count; i++)
-				deck [i].GetComponent<MemoryCard> ().ToggleCards (isFlip);
+        for (int i = 0; i < deck.Count; i++)
+				deck [i].GetComponent<MemoryCard> ().ToggleCards (control.isFlip);
 		
 	}
 
@@ -340,11 +339,9 @@ public class GameMode : MonoBehaviour {
 
 		var deck = gameObject.GetComponent<MakeDeck> ().GetDeck ();
 
-		var isFlip = this.gameObject.GetComponent<ControlStart> ().Fliped;
-
-		if (isFlip)
+		if (control.isFlip)
 			for (int i = 0; i < deck.Count; i++)
-				deck [i].GetComponent<MemoryCard> ().ToggleCards (isFlip);
+				deck [i].GetComponent<MemoryCard> ().ToggleCards (control.isFlip);
 	
 	}
 

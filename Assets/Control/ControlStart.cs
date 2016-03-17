@@ -20,7 +20,7 @@ public class ControlStart : MonoBehaviour
 
     private int gameCount = 0, matchs = 0, missMatch = 0;
 
-	private bool isFlip = false;
+	private bool cardFlip = false;
 
 	private string backgroundMusic = "BioShock Soundtrack_ 02 Welcome to Rapture",
 	farewellMusic = "Bioshock Credits [720p]", matchMusic = "Welcome To The Circus Of Value!", missmusic = "EL AMMO BANDITO SENIOR";
@@ -102,11 +102,11 @@ public class ControlStart : MonoBehaviour
 	 * 
 	 * 
 	 * ********************************************************/
-    public bool Fliped{
+    public bool isFlip{
 
-		set{ this.isFlip = value; }
+		set{ this.cardFlip = value; }
 
-		get{ return this.isFlip;}
+		get{ return this.cardFlip;}
 
 	}
 

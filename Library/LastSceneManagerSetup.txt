@@ -1,4 +1,5 @@
 sceneSetups:
-- path: Assets/Memory_Scene.unity
+- path: C:/Users/BT21129/Desktop/Kevin T^3 - Replays/REEEWIIIIND/Assets/Scenes/Replay
+    Scene.unity
   isLoaded: 1
   isActive: 1

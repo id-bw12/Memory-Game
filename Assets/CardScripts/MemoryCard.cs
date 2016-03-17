@@ -11,8 +11,6 @@ public class MemoryCard : MonoBehaviour {
 
 	private Sprite faceCard, backCard;
 
-	private bool isSelected = false;
-
 	// Use this for initialization
 	void Start () {
 
@@ -26,14 +24,11 @@ public class MemoryCard : MonoBehaviour {
 	// Update is called once per frame
 	void Update () {
 
-		if (gameTimer.Enable && isSelected) {
+		if (gameTimer.Enable) {
 			this.transform.Rotate (0.0f, -2.75f, 0.0f);
 
 			CardFlips ();
 		} 
-		else 
-			if(isSelected)
-				isSelected = false;
 		
 	}
 
@@ -47,18 +42,26 @@ public class MemoryCard : MonoBehaviour {
 	 * 
 	 * ********************************************************/
 	void OnMouseDown(){
-		
-		if(!isSelected && !logic.IsMatch()){
 
-			isSelected = true;
+        //if(!logic.IsMatch()){
 
-			gameTimer.SetTimeLimit();
+        //	gameTimer.SetTimeLimit();
 
-            gameTimer.Enable = true;
+        //          gameTimer.Enable = true;
 
-	        logic.CheckRevealedCards(this);
-	    }
-	}
+        //          logic.CheckRevealedCards(this);
+
+        //          this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        //      }
+
+        gameTimer.SetTimeLimit();
+
+        gameTimer.Enable = true;
+
+        logic.CheckRevealedCards(this);
+
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+    }
 
 	/**********************************************************
 	 * 	NAME: 			CardFlips
@@ -75,8 +78,6 @@ public class MemoryCard : MonoBehaviour {
 			this.gameObject.GetComponent<SpriteRenderer> ().sprite = backCard;
 		else if (y >= 90 && y <= 269)
 			this.gameObject.GetComponent<SpriteRenderer> ().sprite = faceCard;
-		else if (y >= 270 && y <= 359)
-			this.gameObject.GetComponent<SpriteRenderer> ().sprite = backCard;
 
     }
 
@@ -91,16 +92,13 @@ public class MemoryCard : MonoBehaviour {
 		set{ this.faceCard = value;}
 	}
 
-	/**********************************************************
+    /**********************************************************
 	 * 	NAME: 			FlipFaceDown
-	 *  DESCRIPTION:	sets the isSelect value to true and 
-	 * 					the timer time limit. Also enables the
+	 *  DESCRIPTION:	sets the timer time limit. Also enables 
 	 * 					the timer.
 	 * 
 	 * ********************************************************/
-	public void FlipFaceDown(){
-
-		isSelected = true;
+    public void FlipFaceDown(){
 
 		gameTimer.SetTimeLimit();
 
@@ -116,8 +114,6 @@ public class MemoryCard : MonoBehaviour {
 	public void FlipFaceUp(){
 
 		this.gameObject.GetComponent<SpriteRenderer>().sprite = faceCard;
-
-		this.gameObject.GetComponent<BoxCollider2D> ().enabled = false;
 
 	}
 
