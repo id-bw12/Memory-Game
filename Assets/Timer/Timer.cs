@@ -7,7 +7,7 @@ public class Timer : MonoBehaviour {
     private System.Timers.Timer time;
 
 	// Use this for initialization
-	public void Start () {
+	private void Start () {
 		
         time = new System.Timers.Timer();
 		time.Elapsed += Time_Elapsed;
@@ -24,13 +24,6 @@ public class Timer : MonoBehaviour {
 
 		time.Enabled = false;
 
-	}
-
-
-    // Update is called once per frame
-	void Update () {
-
-	
 	}
 		
 	/**********************************************************

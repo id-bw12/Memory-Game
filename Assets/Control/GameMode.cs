@@ -263,7 +263,6 @@ public class GameMode : MonoBehaviour {
     void StartGame(){
 		
 		var deck = gameObject.GetComponent<MakeDeck> ().GetDeck ();
-        
 
         for (int i = 0; i < 3; i++) 
 		    buttons [i].GetComponent<Button> ().enabled = false;
@@ -285,14 +284,13 @@ public class GameMode : MonoBehaviour {
 			for (int i = 0; i < deck.Count; i++) 
 				deck [i].GetComponent<BoxCollider2D> ().enabled = true;
 
-
         control.GameNumber += 1;
 
         control.Matchs = 0;
 
         control.MissMatchs = 0;
 
-        GameObject.Find ("Game Label").GetComponent<TextMesh> ().text = "Game: " + this.GetComponent<ControlStart> ().GameNumber;
+        GameObject.Find ("Game Label").GetComponent<TextMesh> ().text = "Game: " + control.GameNumber;
 
         GameObject.Find("Score Label").GetComponent<TextMesh>().text  = "Matchs: 0";
 
@@ -319,8 +317,7 @@ public class GameMode : MonoBehaviour {
             control.isFlip = true;
 			bttnText.text = "Hide";
 		}
-
-
+        
         for (int i = 0; i < deck.Count; i++)
 				deck [i].GetComponent<MemoryCard> ().ToggleCards (control.isFlip);
 		
@@ -376,18 +373,18 @@ public class GameMode : MonoBehaviour {
 	
 		List<GameObject> deck = this.GetComponent<MakeDeck> ().GetDeck ();
 
-		GameObject.Destroy (GameObject.Find("Background"));
+        GameObject.Destroy(GameObject.Find("Background"));
 
-		GameObject.Destroy (GameObject.Find("Date Label"));
+        GameObject.Destroy(GameObject.Find("Date Label"));
 
-		GameObject.Destroy (GameObject.Find("Score Label"));
+        GameObject.Destroy(GameObject.Find("Score Label"));
 
-		GameObject.Destroy (GameObject.Find("Miss Label"));
+        GameObject.Destroy(GameObject.Find("Miss Label"));
 
-		for (int i = 0; i < deck.Count; ++i)
-			GameObject.Destroy (deck [i]);
+        for (int i = 0; i < deck.Count; ++i)
+            GameObject.Destroy(deck[i]);
 
-		GameObject.Destroy (GameObject.Find ("Canvas"));
+        GameObject.Destroy (GameObject.Find ("Canvas"));
 
 		deck.Clear ();
 

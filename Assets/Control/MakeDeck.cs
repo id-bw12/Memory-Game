@@ -38,8 +38,6 @@ public class MakeDeck : MonoBehaviour {
 
 			}
 		}
-
-		//ShuffleImages ();
 	}
 	
 	// Update is called once per frame
@@ -81,15 +79,11 @@ public class MakeDeck : MonoBehaviour {
 
 		memoryCard.transform.localScale = new Vector3 (0.75f, 0.75f, 1.0f);
 
-		memoryCard.AddComponent<SpriteRenderer> ();
+		memoryCard.AddComponent<SpriteRenderer> ().sprite = cardSprite;
 
 		memoryCard.AddComponent<BoxCollider2D> ().enabled = false;
 
-		memoryCard.GetComponent<SpriteRenderer> ().sprite = cardSprite;
-
-		memoryCard.AddComponent<MemoryCard> ();
-
-		memoryCard.GetComponent<MemoryCard> ().Image = cardImage;
+		memoryCard.AddComponent<MemoryCard> ().Image = cardImage;
 
 		deck.Add(memoryCard.gameObject);
 

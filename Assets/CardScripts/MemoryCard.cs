@@ -43,24 +43,16 @@ public class MemoryCard : MonoBehaviour {
 	 * ********************************************************/
 	void OnMouseDown(){
 
-        //if(!logic.IsMatch()){
+        if (!gameTimer.Enable)
+        {
+            gameTimer.SetTimeLimit();
 
-        //	gameTimer.SetTimeLimit();
+            gameTimer.Enable = true;
 
-        //          gameTimer.Enable = true;
+            logic.CheckRevealedCards(this);
 
-        //          logic.CheckRevealedCards(this);
-
-        //          this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
-        //      }
-
-        gameTimer.SetTimeLimit();
-
-        gameTimer.Enable = true;
-
-        logic.CheckRevealedCards(this);
-
-        this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+            this.gameObject.GetComponent<BoxCollider2D>().enabled = false;
+        }
     }
 
 	/**********************************************************
@@ -102,8 +94,10 @@ public class MemoryCard : MonoBehaviour {
 
 		gameTimer.SetTimeLimit();
 
-		gameTimer.Enable = true;
-	}
+        gameTimer.Enable = true;
+
+        this.gameObject.GetComponent<BoxCollider2D>().enabled = true;
+    }
 
 	/**********************************************************
 	 * 	NAME: 			FlipFaceUp
