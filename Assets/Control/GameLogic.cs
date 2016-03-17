@@ -9,17 +9,21 @@ public class GameLogic : MonoBehaviour {
 
 	[SerializeField] private TextMesh scoreLabel, missLabel;
 
-	private int score = 0, missMatch = 0;
+    private int score = 0;
 
 	private bool checkingMatch = false;
 
 	private MemoryCard firstCard, secondCard;
+
+    private ControlStart control;
 
 	// Use this for initialization
 	void Start () {
 	
 		scoreLabel = GameObject.Find ("Score Label").GetComponent<TextMesh> ();
 		missLabel = GameObject.Find ("Miss Label").GetComponent <TextMesh> ();
+
+        control = GameObject.Find("Control Object").GetComponent<ControlStart>();
 	}
 	
 	// Update is called once per frame
@@ -65,18 +69,17 @@ public class GameLogic : MonoBehaviour {
 
         if (secondCard.Image == firstCard.Image) {
 
-            firstCard.FlipFaceUp();
-            secondCard.FlipFaceUp();
-
             this.GetComponent<ControlStart>().PlaySoundEffects(true);
 
             EditorUtility.DisplayDialog ("Match", "Its a match", "Okay");
+     
+            ++control.Matchs;
 
-			this.GetComponent<ControlStart>().Matchs += 1;
+            scoreLabel.text = "Matchs: " + control.Matchs;
 
-			scoreLabel.text = "Matchs: " + this.GetComponent<ControlStart>().Matchs;
+            CheckWinConditions();
 
-		} else {
+        } else {
 
             this.GetComponent<ControlStart>().PlaySoundEffects(false);
 
@@ -91,9 +94,7 @@ public class GameLogic : MonoBehaviour {
 
 			yield return new WaitForSeconds (1.5f);
 
-		}
-	
-		CheckWinConditions ();
+		}	
 
 		secondCard = null;
 		firstCard = null;
@@ -112,7 +113,9 @@ public class GameLogic : MonoBehaviour {
 	 * ********************************************************/
 	private void CheckWinConditions(){
 
-		if (score == 8) {
+        int cardsPairslimit = 8;
+
+		if (control.Matchs == cardsPairslimit) {
 			this.GetComponent<ControlStart> ().Fliped = true;
 
 			this.GetComponent<GameMode> ().ToggleButtons ();
@@ -154,17 +157,4 @@ public class GameLogic : MonoBehaviour {
 		get { return score;}
 		set{ score = value;}
 	}
-
-	/**********************************************************
-	 * 	NAME: 			Misses
-	 *  DESCRIPTION:	Gets and set the miss number
-	 * 
-	 * 
-	 * ********************************************************/
-	public int Misses{
-	
-		get { return missMatch;}
-		set{ missMatch = value;}
-	}
-
 }

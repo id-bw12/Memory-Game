@@ -144,7 +144,7 @@ public class ControlStart : MonoBehaviour
 
         soundEffects.Play();
 
-        soundEffects.Play(44100);
+        soundEffects.Play();
 
     }
    

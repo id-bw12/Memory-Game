@@ -262,8 +262,8 @@ public class GameMode : MonoBehaviour {
 
 		bool isFlip = this.gameObject.GetComponent<ControlStart> ().Fliped;
 
-		buttons [1].GetComponent<Button> ().enabled = false;
-		buttons [2].GetComponent<Button> ().enabled = false;
+        for (int i = 0; i < 3; i++) 
+		    buttons [i].GetComponent<Button> ().enabled = false;
 
 		if (isFlip) {
 			isFlip = false;
@@ -405,6 +405,7 @@ public class GameMode : MonoBehaviour {
 	 * ********************************************************/
 	public void ToggleButtons(){
 
+        buttons [0].gameObject.GetComponent<Button>().enabled = true;
 		buttons [1].gameObject.GetComponent<Button> ().enabled = true;
 		buttons [2].gameObject.GetComponent<Button> ().enabled = true;
 	
